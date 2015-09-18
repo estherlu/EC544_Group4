@@ -1,4 +1,5 @@
 function getDateTime() {
+	//get the time and date, will be added to
     var now     = new Date(); 
     var year    = now.getFullYear();
     var month   = now.getMonth()+1; 
@@ -6,6 +7,7 @@ function getDateTime() {
     var hour    = now.getHours();
     var minute  = now.getMinutes();
     var second  = now.getSeconds(); 
+    //correct the numbers to two digits
     if(month.toString().length == 1) {
         var month = '0'+month;
     }
@@ -55,13 +57,14 @@ io.on('connection', function(socket){
 });
 
 http.listen(3000, function(){
+	//listen on localhost port 3000
   console.log('listening on *:3000');
 });
 
 sp.on("open", function () {
   console.log('open');
 
-
+//creat an array to save the latest temperature of each sendor
   var num = 4;
   var Temps = [];
   for(var i = 0; i < num; i++){
@@ -73,10 +76,12 @@ sp.on("open", function () {
     var dat = data.split(":");
     var index = parseInt(dat[0]);
 
+//save the temperature to the right position
     for(var j = 0; j < num; j++){
       if(index == j) {Temps[j] = parseFloat(dat[1]); break;}
     }
 
+//calculate the average
     var count = num;
     for(var k = 0; k < num; k++){
       avg = avg + Temps[k];
@@ -84,10 +89,10 @@ sp.on("open", function () {
     }
 
     if(count > 0) avg = avg / count;
-    var avg1 = avg.toPrecision(5) + '';
+    var avg1 = avg.toPrecision(5) + '';//only save 5 digits after the decimal point
  
-    console.log('data received: ' + dat[0]);
-    io.emit("chat message", "Current room average temperature: " + avg1 + "°C at " + getDateTime());
+    console.log('data received: ' + dat[0]);// print the received temperature in the console
+    io.emit("chat message", "Current room average temperature: " + avg1 + "°C at " + getDateTime());//add date and time to the message
     avg = 0;
   });
 });
