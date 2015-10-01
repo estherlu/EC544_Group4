@@ -73,9 +73,9 @@ sp.on("open", function () {
     Temps[i] = 0;
   }
   var avg = 0;
-  var fs = require('fs');
-  var avgfile = '/Users/yisilu/Desktop/EC544/EC544_demos/demos/xbeeChat/avg.json';
-  var aimfile = [];
+  var fs = require('fs');//use file system to save data into files
+  var avgfile = '/Users/yisilu/Desktop/EC544/EC544_demos/demos/xbeeChat/avg.json';//one file is for the average value
+  var aimfile = [];//each sensor have an independent file
   for(var i = 0; i < num; i++){
     aimfile[i] = '/Users/yisilu/Desktop/EC544/EC544_demos/demos/xbeeChat/' + i + '' + '.json';
   }
@@ -89,10 +89,12 @@ sp.on("open", function () {
     for(var j = 0; j < num; j++){
       if(index == j) {
         Temps[j] = parseFloat(dat[1]);
+        //save the temperature and time into object
         tempObjs[j] = {temp: dat[1], time: timenow};
+        //save the data object into file
         fs.appendFile(aimfile[j], JSON.stringify(tempObjs[j]), function(err){
           if (err) throw err;
-          console.log('The "data to append" was appended to file!');
+          //console.log('The "data to append" was appended to file!');
         });
         //console.log(dat[0] + ' ' + JSON.stringify(tempObjs[j]));
         break;
@@ -109,9 +111,10 @@ sp.on("open", function () {
     if(count > 0) avg = avg / count;
     var avg1 = avg.toPrecision(5) + '';//only save 5 digits after the decimal point
     avgObj = {temp: avg1, time: timenow};
+    //save average value into file
     fs.appendFile(avgfile, JSON.stringify(avgObj), function(err){
       if (err) throw err;
-      console.log('The "avg to append" was appended to file!');
+      //console.log('The "avg to append" was appended to file!');
     });
     console.log('data received: ' + dat[0] + ': ' + dat[1]);// print the received temperature in the console
     io.emit("chat message", "Current room average temperature: " + avg1 + "°C at " + timenow);//add date and time to the message
