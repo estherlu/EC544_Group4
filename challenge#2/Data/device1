@@ -1,0 +1,58 @@
+{
+    "type": "line",
+    "title": {
+        "text": "Sensor 1 Temperature Data",
+         backgroundColor:"rgba(0,0,0,0.7)",
+    },
+    //"legend": {},
+    "plot": {
+       /* "valueBox": {
+            "placement": "top",
+            //"type":"all"
+
+        }*/
+    },
+    
+    "plotarea": {
+        "margin-top": "40",
+        "margin" : "dynamic"
+    },
+
+    "scaleX": {
+        "zooming":true,
+        "text":"Date-Time",
+
+    },
+
+     "scroll-x":{
+                "bar":{
+                    "background-color":"green",
+                    "alpha":0.5}
+                },
+
+    "scaleY": {
+        "label": {
+            "text": "Temperature (°C)",
+            "zooming":true
+        }
+    },
+
+    "tooltip":{ 
+        "text":"Device 1 recorded %v C on %k." 
+     },
+
+      "csv":{
+        "url":"Data/Device1.csv",
+        "vertical-labels":true,
+        "smart-scales":true
+    },
+
+    "series": [
+    {
+      "line-color":"green",
+    }]
+   
+   }
+
+
+

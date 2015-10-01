@@ -1,0 +1,56 @@
+{
+    "type": "line",
+    "title": {
+        "text": "Sensor 4 Historical Temp Data",
+         backgroundColor:"rgba(0,0,0,0.7)",
+    },
+    //"legend": {},
+    "plot": {
+       /* "valueBox": {
+            "placement": "top",
+            //"type":"all"
+
+        }*/
+    },
+
+    "plotarea": {
+        "margin-top": "40",
+        "margin" : "dynamic"
+    },
+
+    "scaleX": {
+        "zooming":true,
+    },
+
+     "scroll-x":{
+                "bar":{
+                    "background-color":"green",
+                    "alpha":0.5}
+                },
+
+    "scaleY": {
+        "label": {
+            "text": "Temperature (°C)",
+            "zooming":true
+        }
+    },
+
+    "tooltip":{ 
+        "text":"Device 4 recorded %v C on %k." 
+     },
+
+      "csv":{
+        "url":"Data/Device4.csv",
+        "vertical-labels":true,
+        "smart-scales":true
+    },
+
+    "series": [
+    {
+      "line-color":"#ffff00",
+    }]
+   
+   }
+
+
+

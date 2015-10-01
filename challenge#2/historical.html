@@ -1,0 +1,70 @@
+<html>
+
+<head>
+<title>Historical Temperature</title>
+<link rel="stylesheet" type="text/css" href="Style/style.css" media="screen" />
+<script src="zingchart.min.js"></script>
+<script src= "https://cdn.zingchart.com/2.1.1/zingchart.min.js"></script>
+<script> zingchart.MODULESDIR = "https://cdn.zingchart.com/2.1.1/modules/";
+		ZC.LICENSE = ['569d52cefae586f634c54f86dc99e6a9','ee6b7db5b51705a13dc2339db3edaf6d'];</script>
+<script>
+    window.onload=function(){ 
+    zingchart.render({ 
+    	id : 'chart1', 
+        dataurl:"./Data/device1",
+    	height: 300, 
+    	width: 590
+    });
+    zingchart.render({ 
+        id : 'chart2', 
+        dataurl:"./Data/device2",
+        height: 300, 
+        width: 590
+    });
+    zingchart.render({ 
+        id : 'chart3', 
+        dataurl:"./Data/device3",
+         height: 300, 
+        width: 590
+    });
+    zingchart.render({ 
+        id : 'chart4', 
+        dataurl:"./Data/device4",
+         height: 300, 
+        width: 590
+    });
+    zingchart.render({ 
+        id : 'avgchart', 
+        dataurl:"./Data/avg",
+        height: 300, 
+        width: 1200
+    });
+    }
+</script>
+</head>
+
+<body>
+<div class="content">
+    <div id="top">
+      <div id="icons"><a href="realtime"><img src="Style/images/home.gif" alt="Realtime" /></a><a href="historical"><img src="Style/images/sitemap.gif" alt="Historical" /></a> </div>
+      <h1>Historical Temperature Data</h1>
+      <h2>Group 4</h2>
+    </div> 
+
+    <div style="margin: auto; width:1200px" id='avgchart'></div> <br/>
+    <div>
+        <div style="margin: auto; height: 320; float: left;" id='chart1'></div>
+        <div style="margin: auto; height: 320; float: right;" id='chart2'></div>
+        <p><br />  <br /> </p>
+
+    </div> 
+
+
+    <div>
+        <div style="margin: auto; height: 320; float: left;" id='chart3'></div>
+        <div style="margin: auto; height: 320; float: right;" id='chart4'></div>
+    </div>
+</div>
+</body>
+
+</html>

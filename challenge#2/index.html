@@ -1,0 +1,514 @@
+<html>
+
+<head>
+<title>Realtime Temperature</title>
+<link rel="stylesheet" type="text/css" href="Style/style.css" media="screen" />
+<script src="http://cdn.zingchart.com/zingchart.min.js"></script>
+<script> zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9","ee6b7db5b51705a13dc2339db3edaf6d"];</script>
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+    var newData0 = 0;
+    var newData1 = 0;
+    var newData2 = 0;
+    var newData3 = 0;
+
+    var graphObj = {
+      "background-color": "none",
+        "type": "bar",
+        "legend":{
+          "background-color":"#0A64A4",
+          "shadow":0,
+          "border-width":2,
+          "border-color":"#555",
+          "alpha":0.6,
+          "border-radius":5
+        },
+        "refresh": {
+          "type": "feed",
+            "transport": "js",
+            "url": "feed()",
+            "max-ticks": 25,
+            "interval": 200
+      },
+        "scale-x": {  
+          "line-width": 1,
+            "line-color": "#000",
+            "guide": {
+            "visible": 0
+          },
+            "tick": {
+              "line-width": 1
+          },
+            "item": {
+              "visible": 1
+          },
+            "step": 100,
+            "min-value": (new Date()).getTime(),
+            "transform": {
+              "type": "date",
+                "text": "%d %M %Y<br>%g:%i:%s",
+                "item": {
+                  "visible": 0
+              }
+          }
+      },
+        "scale-y": {
+          "line-width": 1,
+            "line-color": "#000",
+            "-max-value": 1000,
+            "min-value": 0,
+            "guide": {
+            "visible": true,
+            "line-width": "1px",
+            "line-style": "solid",
+            "line-color": "#000"
+        },
+            "tick": {
+            "line-width": 0
+        },
+            "item": {
+            "visible": 1
+        },
+            "max-items": 4
+    },
+        "crosshair-y": {
+        "line-width": "32px",
+            "line-color": "#ffffff",
+            "alpha": 0.3
+    },
+
+        "plot": {
+        "aspect": "spline",
+            "monotone": 1,
+            "stacked": 1,
+            "exact": 1,
+            "max-trackers": 0,
+            "line-width": 1,
+            "-background-color": "#fff200 #ffbf00",
+            "alpha-area": 0.6,
+            "shadow": 0,
+            "marker": {
+            "visible": 0,
+                "size": 3,
+                "border-width": 0,
+                "shadow": 0
+        }
+    },
+        "plotarea": {
+        "margin": "20 40 40 50"
+    },
+    "series": [{"values":[],"background-color":"#7ca82b","line-color":"#5e8021"}]
+};
+var graphArray = [graphObj]
+
+var chartDataTest = {
+    "gui":{
+        "context-menu":{
+            "button":{
+                "visible":false
+            },
+            "gear":{
+                "visible":false
+            }
+        }
+    },
+    "graphset": graphArray
+};
+
+var chartData={
+    "gui":{
+        "context-menu":{
+            "trigger":{
+                "visible":0
+            }
+        }
+    },
+    "show-progress":false,
+    //"theme":"mini",
+    "graphset":[
+    {
+    "type":"line", // bar or line
+    "title": { //format the title bar
+      "text": "Realtime Room Temperature",
+      "backgroundColor":"#6B8E23",
+      "fontFamily": "Helvetica",
+      "fontSize": 20
+    },
+    "legend":{
+      "marker":{
+          "type":"circle",
+          "size":4,
+          "border-color":"#333"
+      },
+      "layout":"x4",
+      "position":"50% 100%",
+      //"background-color":"#0A64A4",
+      "shadow":0,
+      //"border-width":2,
+      //"border-color":"#555",
+      "alpha":1,
+      //"border-radius":5
+    },
+    "refresh": {
+    "type": "feed",
+      "transport": "js",
+      "url": "feed()",
+      "max-ticks": 50,
+      "interval": 200,
+      "curtain":{  //Message before having data
+            "text": "The data is loading...",
+            "color": "red",
+            "text-size": 30,
+            "bold": false
+        }
+    },
+    "plotarea":{
+        "margin":"50 20 70 60" // format region of display
+    },
+    "scale-x": {
+      "line-width": 1,
+          "line-color": "#000",
+          "guide": {
+          "visible": 0
+      },
+          "tick": {
+          "line-width": 1
+      },
+          "item": {
+          "visible": 1
+      },
+          "step": 100,
+          "min-value": (new Date()).getTime(),
+          "transform": {
+            "type": "date",
+              "text": "%g:%i:%s",
+              "item": {
+              "visible": 0
+          }
+      }
+  },
+    "scale-y": {
+         "label": {
+      "text": "Temperature (°C)",
+      "font-size": "15px"
+    },  
+      "line-width": 1,
+        "line-color": "#000",
+        "-max-value": 1000,
+        "min-value": 0,
+        "guide": {
+        "visible": true,
+            "line-width": "1px",
+            "line-style": "solid",
+            "line-color": "#000"
+        },   
+      "tick": {
+          "line-width": 0
+      },
+        "item": {
+          "visible": 1
+      },
+        "max-items": 4
+  },
+  "crosshair-y": { // cross bar of parallel to x axis
+    "line-width": "32px",
+      "line-color": "#ffffff",
+      "alpha": 0.3
+  },
+    "zoom":{
+        "preserve-zoom":true,
+        "background-color":"#ff9900"
+    },
+    "plot":{
+        "line-width":2,
+        "-shadow":1,
+        "-border-width":2,
+        "-border-color":"#f00",
+        "-line-style":"dotted"
+    },
+    "series":[
+        {
+          "text": "Device 1",
+            "values":[]
+        },
+        {
+          "text": "Device 2",
+            "values":[]
+        },
+        {
+          "text": "Device 3",
+            "values":[]
+        },
+        {
+          "text": "Device 4",
+            "values":[]
+        }
+    ]
+}
+]
+};
+
+var avgTemp = {
+  "graphset":[
+    {
+        "type":"gauge",
+        "background-color":"#fff #eee",
+        "title": { //format the title bar
+          "text": "Average Room Temperature Meter",
+          "backgroundColor":"#6B8E23",
+          "fontFamily": "Helvetica",
+          "fontSize": 20
+    },
+      "plot":{
+          "background-color":"#666"
+      },
+      "plotarea":{
+          "margin":"dynamic"
+      },
+      "refresh": {
+    "type": "feed",
+      "transport": "js",
+      "url": "feedMeter()",
+      "interval": 1
+    },
+      "scale":{
+          "size-factor":0.75,
+          "offset-y":120
+      },
+      "tooltip":{
+        "background-color":"black"
+      },
+      "scale-r":{
+          "values":"-20:80:10",
+          "border-color":"#b3b3b3",
+          "border-width":"2",
+          "background-color":"#eeeeee,#b3b3b3",
+          "ring":{
+              "size":50,
+              "offset-r":"130px",
+              "rules":[
+                  {
+                      "rule":"%v >=-20 && %v < 0",
+                      "background-color":"#0000FF"
+                  },
+                  {
+                      "rule":"%v >= 0 && %v < 20",
+                      "background-color":"#5882FA"
+                  },
+                  {
+                      "rule":"%v >= 20 && %v < 40",
+                      "background-color":"#FAC100"
+                  },
+                  {
+                      "rule":"%v >= 40 && %v < 60",
+                      "background-color":"#EC7928"
+                  },
+                  {
+                      "rule":"%v >= 60",
+                      "background-color":"#FB0A02"
+                  }
+              ]
+          }
+      },
+      "labels":[
+          {
+              "id":"lbl1",
+              "x":"50%",
+              "y":"90%",
+              "width":80,
+              "offsetX":160,
+              "textAlign":"center",
+              "padding":10,
+              "anchor":"c",
+              "text":"Insanely Hot",
+              "backgroundColor":"#FB0A02",
+              "tooltip":{
+                  "padding":10,
+                  "backgroundColor":"#ea0901",
+                  "text":"< 80°C",
+                  "shadow":0
+              }
+          },
+          {
+              "id":"lbl2",
+              "x":"50%",
+              "y":"90%",
+              "width":80,
+              "offsetX":80,
+              "textAlign":"center",
+              "padding":10,
+              "anchor":"c",
+              "text":"So Hot",
+              "backgroundColor":"#EC7928",
+              "tooltip":{
+                  "padding":10,
+                  "backgroundColor":"#da6817",
+                  "text":"> 40°C < 60°C",
+                  "shadow":0
+              }
+          },
+          {
+              "id":"lbl3",
+              "x":"50%",
+              "y":"90%",
+              "width":80,
+              "offsetX":0,
+              "textAlign":"center",
+              "padding":10,
+              "anchor":"c",
+              "text":"Hot",
+              "backgroundColor":"#FAC100",
+              "tooltip":{
+                  "padding":10,
+                  "backgroundColor":"#e9b000",
+                  "text":"> 20°C < 40°C",
+                  "shadow":0
+              }
+          },
+          {
+              "id":"lbl4",
+              "x":"50%",
+              "y":"90%",
+              "width":80,
+              "offsetX":-80,
+              "textAlign":"center",
+              "padding":10,
+              "anchor":"c",
+              "text":"Cold",
+              "backgroundColor":"#5882FA",
+              "tooltip":{
+                  "padding":10,
+                  "backgroundColor":"#5882FA",
+                  "text":"> 0°C < 20°C",
+                  "shadow":0
+              }
+          },
+          {
+              "id":"lbl5",
+              "x":"50%",
+              "y":"90%",
+              "width":80,
+              "offsetX":-160,
+              "textAlign":"center",
+              "padding":10,
+              "anchor":"c",
+              "text":"Very Cold",
+              "backgroundColor":"#0000FF",
+              "tooltip":{
+                  "padding":10,
+                  "backgroundColor":"#0000FF",
+                  "text":"< 0°C",
+                  "shadow":0
+              }
+          }
+      ],
+      "series":[
+          {
+              "values":[26],
+              "animation":{
+                  "method":2,
+                  "effect":2,
+                  "speed":2500
+              }
+          }
+      ],
+      "alpha":1.0
+  }
+]};
+
+  window.feed = function(callback) {
+        var tick = {};
+        tick.plot0 = newData0;
+        tick.plot1 = newData1;
+        tick.plot2 = newData2;
+        tick.plot3 = newData3;
+        //tick.plot0 = parseInt(10+900*Math.random(), 10);
+        callback(JSON.stringify(tick));
+    };
+
+    window.feedMeter = function() {
+      var count = 0;
+      if(newData0 != 0)
+        count++;
+      if(newData1 != 0)
+        count++;
+      if(newData2 != 0)
+        count++;
+      if(newData3 != 0)
+        count++;
+      var avg = [(newData0 + newData1 + newData2 + newData3) /count];
+        zingchart.exec("avgTemp", "setseriesvalues", {
+        "values":[avg]
+      });
+    };
+
+  window.onload=function(){  // Render Method[2]
+    zingchart.render({
+      id:"chartDiv",
+      output:"svg",
+      height:400,
+      width:700,
+      data: chartData
+    });
+    zingchart.render({ 
+      id : 'avgTemp', 
+      data : avgTemp, 
+      height: 400, 
+      width: 400
+    });
+  };
+  
+</script>
+</head>
+
+
+<body>
+<div class="content">
+  <div id="top">
+   <div id="icons"> <a href="realtime"><img src="Style/images/home.gif" alt="Realtime" /></a><a href="/historical"><img src="Style/images/sitemap.gif" alt="Historical" /></a> 
+   </div>
+  <h1>Realtime Temperature Data</h1>
+  <h2>Group 4</h2>
+  </div>
+  
+<script>
+  var socket = io();
+</script>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+  var socket = io();
+  $('form').submit(function(){
+    socket.emit('chat message', $('#m').val());
+    $('#m').val('');
+    return false;
+  });
+  socket.on('chat message', function(msg){
+    if (msg[0] == "1") newData0 = parseFloat(msg.split(":")[1]);
+    if (msg[0] == "2") newData1 = parseFloat(msg.split(":")[1]);
+    if (msg[0] == "3") newData2 = parseFloat(msg.split(":")[1]);
+    if (msg[0] == "4") newData3 = parseFloat(msg.split(":")[1]);
+    $('#messages').append($('<li>').text(msg));
+  });
+</script>
+</head>
+
+<body>
+  <!--Chart Placement[3]-->
+  <div>
+    <div style="margin: auto; float: left;"  id = 'chartDiv'></div>
+    <div style="margin: auto; float: right;" id = 'avgTemp'></div>
+  </div>
+
+  </div>
+   
+    <!--ul id="messages"></ul-->
+    <!--form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form-->
+
+</body>
+
+</html>

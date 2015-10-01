@@ -1,0 +1,59 @@
+{
+    "type": "line",
+    "title": {
+        "text": "Average Room Temperature Data",
+         backgroundColor:"rgba(0,0,0,0.7)",
+    },
+    //"legend": {},
+    "plot": {
+       /* "valueBox": {
+            "placement": "top",
+            //"type":"all"
+
+        }*/
+    },
+
+    "plotarea": {
+        "margin-top": "40",
+        "margin" : "dynamic"
+    },
+    
+    "scaleX": {
+        "label": {
+            "text": "Date-Time",
+            "zooming":true,
+          }
+    },
+
+     "scroll-x":{
+                "bar":{
+                    "background-color":"green",
+                    "alpha":0.5}
+                },
+
+    "scaleY": {
+        "label": {
+            "text": "Temperature (°C)",
+            "zooming":true
+        }
+    },
+
+    "tooltip":{ 
+        "text":"Average of %v C on %k." 
+     },
+
+      "csv":{
+        "url":"Data/Average.csv",
+        "vertical-labels":true,
+        "smart-scales":true
+    },
+
+    "series": [
+    {
+      "line-color":"purple",
+    }]
+   
+   }
+
+
+
