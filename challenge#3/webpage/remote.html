@@ -7,34 +7,34 @@
 		div.LED1 {
 		    position: absolute;
 		    top: 20%;
-		    left: 1%;
+		    left: 3%;
 		    width: 45%;
 		    height: 35%;
-		    border: 3px solid #8AC007;
+		    border: 3px solid #BDBDBD;
 		}
 		div.LED2 {
 		    position: absolute;
 		    top: 20%;
-		    left: 48%;
+		    left: 51%;
 		    width: 45%;
 		    height: 35%;
-		    border: 3px solid #8AC007;
+		    border: 3px solid #BDBDBD;
 		}
 		div.LED3 {
 		    position: absolute;
 		    top: 60%;
-		    left: 1%;
+		    left: 3%;
 		    width: 45%;
 		    height: 35%;
-		    border: 3px solid #8AC007;
+		    border: 3px solid #BDBDBD;
 		}
 		div.LED4 {
 		    position: absolute;
 		    top: 60%;
-		    left: 48%;
+		    left: 51%;
 		    width: 45%;
 		    height: 35%;
-		    border: 3px solid #8AC007;
+		    border: 3px solid #BDBDBD;
 		}
 
 	</style>
@@ -42,34 +42,36 @@
 <body onload="getStat()">
 <div class="LED1">
 	<h3 align="middle" 	style="font-size:28px">LED1</h3>
-	<img id="myBulb1" onload="initBulb('myBulb1',1)" src="http://www.w3schools.com/js/pic_bulbon.gif" width="100" height="180" style="position: relative; LEFT: 20%">
-	<button onclick="onBulb('myBulb1', 1)" style="position: absolute; font-size:20px; top:35%; left: 60%" align ="top">on</button>
-	<button onclick="offBulb('myBulb1', 1)" style="position: absolute; font-size:20px; top:55%; left: 60%" align ="top">off</button>
+	<img id="myBulb1" onload="initBulb('myBulb1',1)" src="http://www.w3schools.com/js/pic_bulbon.gif" width="25%" height="75%" style="position: relative; LEFT: 20%">
+	<button onclick="onBulb('myBulb1', 1)" style="position: absolute; top:35%; left: 60%" align ="top">on</button>
+	<button onclick="offBulb('myBulb1', 1)" style="position: absolute; top:55%; left: 60%" align ="top">off</button>
 </div>
 
 <div class="LED2">
 	<h3 align="middle" 	style="font-size:28px">LED2</h3>
-	<img id="myBulb2" onload="initBulb('myBulb2',2)" src="http://www.w3schools.com/js/pic_bulbon.gif" width="100" height="180" style="position: relative; LEFT: 20%">
-	<button onclick="onBulb('myBulb2', 2)" style="position: absolute; font-size:20px; top:35%; left: 60%" align ="top">on</button>
-	<button onclick="offBulb('myBulb2', 2)" style="position: absolute; font-size:20px; top:55%; left: 60%" align ="top">off</button>
+	<img id="myBulb2" onload="initBulb('myBulb2',2)" src="http://www.w3schools.com/js/pic_bulbon.gif" width="25%" height="75%" style="position: relative; LEFT: 20%">
+	<button onclick="onBulb('myBulb2', 2)" style="position: absolute; top:35%; left: 60%" align ="top">on</button>
+	<button onclick="offBulb('myBulb2', 2)" style="position: absolute; top:55%; left: 60%" align ="top">off</button>
 </div>
 
 <div class="LED3">
 	<h3 align="middle" 	style="font-size:28px">LED3</h3>
-	<img id="myBulb3" onload="initBulb('myBulb3',3)" src="http://www.w3schools.com/js/pic_bulbon.gif" width="100" height="180" style="position: relative; LEFT: 20%">
-	<button onclick="onBulb('myBulb3', 3)" style="position: absolute; font-size:20px; top:35%; left: 60%" align ="top">on</button>
-	<button onclick="offBulb('myBulb3', 3)" style="position: absolute; font-size:20px; top:55%; left: 60%" align ="top">off</button>
+	<img id="myBulb3" onload="initBulb('myBulb3',3)" src="http://www.w3schools.com/js/pic_bulbon.gif" width="25%" height="75%" style="position: relative; LEFT: 20%">
+	<button onclick="onBulb('myBulb3', 3)" style="position: absolute; top:35%; left: 60%" align ="top">on</button>
+	<button onclick="offBulb('myBulb3', 3)" style="position: absolute; top:55%; left: 60%" align ="top">off</button>
 </div>
 
 <div class="LED4">
 	<h3 align="middle" 	style="font-size:28px">LED4</h3>
-	<img id="myBulb4" onload="initBulb('myBulb',4)" src="http://www.w3schools.com/js/pic_bulbon.gif" width="100" height="180" style="position: relative; LEFT: 20%">
-	<button onclick="onBulb('myBulb4', 4)" style="position: absolute; font-size:20px; top:35%; left: 60%" align ="top">on</button>
-	<button onclick="offBulb('myBulb4', 4)" style="position: absolute; font-size:20px; top:55%; left: 60%" align ="top">off</button>
+	<img id="myBulb4" onload="initBulb('myBulb',4)" src="http://www.w3schools.com/js/pic_bulbon.gif" width="25%" height="75%" style="position: relative; LEFT: 20%">
+	<button onclick="onBulb('myBulb4', 4)" style="position: absolute; top:35%; left: 60%" align ="top">on</button>
+	<button onclick="offBulb('myBulb4', 4)" style="position: absolute;top:55%; left: 60%" align ="top">off</button>
 </div>
 <script>
 	var bStates = [0,1,0,0];
+
 	function getStat(){
+
 		var image1 = document.getElementById('myBulb1');
 		var image2 = document.getElementById('myBulb2');
 		var image3 = document.getElementById('myBulb3');
@@ -94,10 +96,17 @@
 			image.src = "http://www.w3schools.com/js/pic_bulbon.gif";
 			bStates[num-1] = 1;
 		}
-		
+		var xhttp = new XMLHttpRequest();
+		var url = "localhost:3001";
+		xhttp.onreadystatechange = function(){
+		    if(xhttp.readyState == 4){alert(xhttp.status);}
+		}
+		xhttp.open("POST",url,true);			
+		xhttp.send();
+
 	}
 
-	function offBulb (bulb) {
+	function offBulb (bulb,num) {
 		var image = document.getElementById(bulb);
 		if(image.src = "http://www.w3schools.com/js/pic_bulbon.gif"){
 			image.src = "http://www.w3schools.com/js/pic_bulboff.gif";
