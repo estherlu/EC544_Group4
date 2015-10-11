@@ -42,28 +42,28 @@
 <body onload="getStat()">
 <div class="LED1">
 	<h3 align="middle" 	style="font-size:28px">LED1</h3>
-	<img id="myBulb1" onload="initBulb('myBulb1',1)" src="http://www.w3schools.com/js/pic_bulbon.gif" width="25%" height="75%" style="position: relative; LEFT: 20%">
+	<img id="myBulb1" onload="initBulb('myBulb1',1)" src="Style/bulbon.gif" height="75%"  style="position: relative; LEFT: 20%">
 	<button onclick="onBulb('myBulb1', 1)" style="position: absolute; top:35%; left: 60%" align ="top">on</button>
 	<button onclick="offBulb('myBulb1', 1)" style="position: absolute; top:55%; left: 60%" align ="top">off</button>
 </div>
 
 <div class="LED2">
 	<h3 align="middle" 	style="font-size:28px">LED2</h3>
-	<img id="myBulb2" onload="initBulb('myBulb2',2)" src="http://www.w3schools.com/js/pic_bulbon.gif" width="25%" height="75%" style="position: relative; LEFT: 20%">
+	<img id="myBulb2" onload="initBulb('myBulb2',2)" src="Style/bulbon.gif" height="75%" style="position: relative; LEFT: 20%">
 	<button onclick="onBulb('myBulb2', 2)" style="position: absolute; top:35%; left: 60%" align ="top">on</button>
 	<button onclick="offBulb('myBulb2', 2)" style="position: absolute; top:55%; left: 60%" align ="top">off</button>
 </div>
 
 <div class="LED3">
 	<h3 align="middle" 	style="font-size:28px">LED3</h3>
-	<img id="myBulb3" onload="initBulb('myBulb3',3)" src="http://www.w3schools.com/js/pic_bulbon.gif" width="25%" height="75%" style="position: relative; LEFT: 20%">
+	<img id="myBulb3" onload="initBulb('myBulb3',3)" src="Style/bulbon.gif" height="75%" style="position: relative; LEFT: 20%">
 	<button onclick="onBulb('myBulb3', 3)" style="position: absolute; top:35%; left: 60%" align ="top">on</button>
 	<button onclick="offBulb('myBulb3', 3)" style="position: absolute; top:55%; left: 60%" align ="top">off</button>
 </div>
 
 <div class="LED4">
 	<h3 align="middle" 	style="font-size:28px">LED4</h3>
-	<img id="myBulb4" onload="initBulb('myBulb',4)" src="http://www.w3schools.com/js/pic_bulbon.gif" width="25%" height="75%" style="position: relative; LEFT: 20%">
+	<img id="myBulb4" onload="initBulb('myBulb',4)" src="Style/bulbon.gif" height="75%" style="position: relative; LEFT: 20%">
 	<button onclick="onBulb('myBulb4', 4)" style="position: absolute; top:35%; left: 60%" align ="top">on</button>
 	<button onclick="offBulb('myBulb4', 4)" style="position: absolute;top:55%; left: 60%" align ="top">off</button>
 </div>
@@ -77,10 +77,10 @@
 		var image3 = document.getElementById('myBulb3');
 		var image4 = document.getElementById('myBulb4');
 
-		if(bStates[0] == 0){image1.src = "http://www.w3schools.com/js/pic_bulboff.gif";}
-		if(bStates[1] == 0){image2.src = "http://www.w3schools.com/js/pic_bulboff.gif";}
-		if(bStates[2] == 0){image3.src = "http://www.w3schools.com/js/pic_bulboff.gif";}
-		if(bStates[3] == 0){image4.src = "http://www.w3schools.com/js/pic_bulboff.gif";}
+		if(bStates[0] == 0){image1.src = "Style/bulboff.gif";}
+		if(bStates[1] == 0){image2.src = "Style/bulboff.gif";}
+		if(bStates[2] == 0){image3.src = "Style/bulboff.gif";}
+		if(bStates[3] == 0){image4.src = "Style/bulboff.gif";}
 	}
 	// function initBulb(bulb,num){
 	// 	var image = document.getElementById(bulb);
@@ -92,24 +92,16 @@
 	// }
 	function onBulb(bulb,num){
 		var image = document.getElementById(bulb);
-		if(image.src = "http://www.w3schools.com/js/pic_bulboff.gif"){
-			image.src = "http://www.w3schools.com/js/pic_bulbon.gif";
+		if(image.src = "Style/bulboff.gif"){
+			image.src = "Style/bulbon.gif";
 			bStates[num-1] = 1;
 		}
-		var xhttp = new XMLHttpRequest();
-		var url = "localhost:3001";
-		xhttp.onreadystatechange = function(){
-		    if(xhttp.readyState == 4){alert(xhttp.status);}
-		}
-		xhttp.open("POST",url,true);			
-		xhttp.send();
-
 	}
 
 	function offBulb (bulb,num) {
 		var image = document.getElementById(bulb);
-		if(image.src = "http://www.w3schools.com/js/pic_bulbon.gif"){
-			image.src = "http://www.w3schools.com/js/pic_bulboff.gif";
+		if(image.src = "Style/bulbon.gif"){
+			image.src = "Style/bulboff.gif";
 			bStates[num-1] = 0;
 		}
 	}
