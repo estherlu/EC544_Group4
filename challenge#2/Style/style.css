@@ -18,11 +18,17 @@ a:hover { color: #DA3B3B; background: inherit; text-decoration: underline}
 p {	margin: 5px 0; }
 h1 {	font: bold 3.0em Arial, Sans-Serif; padding: 8px 0 4px 0; margin: 0; letter-spacing: -1px; }
 h2 { font: bold 1.6em Arial, Sans-Serif; letter-spacing: -1px; }
-h3 { padding: 4px 0; margin:  0; }
+h3 { padding: 4px 0; margin:  1px; font-size: 30px; }
 ul { margin: 0; padding : 0; list-style: none; }
 img { border: 0; }
 hr { height: 1px; border-style: none; color: #d0d0d0; background-color: #C0C0C0; margin: 10px 0; }
+/*button {font-size: 10px}*/
 
+/*div.LED1 {position: absolute; top: 20%; left: 1%; width: 45%; height: 38%; border: 3px solid #8AC007;}
+div.LED2 {position: absolute; top: 20%; left: 1%; width: 45%; height: 38%; border: 3px solid #8AC007;}
+div.LED3 {position: absolute; top: 20%; left: 1%; width: 45%; height: 38%; border: 3px solid #8AC007;}
+div.LED4 {position: absolute; top: 20%; left: 1%; width: 45%; height: 38%; border: 3px solid #8AC007;}*/
+/*#LED1 {position: absolute; top: 50px; left: 3px; width: 45px; height: 38px; border: 3px solid #8AC007;}*/
 
 .content { margin: 0px auto; width: 1200px; }
 
@@ -77,4 +83,6 @@ hr { height: 1px; border-style: none; color: #d0d0d0; background-color: #C0C0C0;
 #footer { clear: both; border-top: 1px solid #DCDCDC; margin: 0 0 3em 0; color: #777;  background: #fff }
 #footer .right  { float: right; text-align: right; background: #FFF; }
 #footer a { text-decoration: none; background: #FFF }
+
+
 	

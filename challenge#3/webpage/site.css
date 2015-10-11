@@ -10,8 +10,8 @@ div.LED1 {
 div.LED2 {
     position: absolute;
     top: 20%;
-    left: 1%;
+    left: 48%;
     width: 45%;
-    height: 38%;
+    height: 70%;
     border: 3px solid #8AC007;
 }
