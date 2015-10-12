@@ -67,6 +67,14 @@
 	<button onclick="onBulb('myBulb4', 4)" style="position: absolute; top:35%; left: 60%" align ="top">on</button>
 	<button onclick="offBulb('myBulb4', 4)" style="position: absolute;top:55%; left: 60%" align ="top">off</button>
 </div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+</script>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+
 <script>
 	var bStates = [0,1,0,0];
 
@@ -95,6 +103,7 @@
 		if(image.src = "Style/bulboff.gif"){
 			image.src = "Style/bulbon.gif";
 			bStates[num-1] = 1;
+			socket.emit('bStates', bStates.toString().replace(/,/g, ''));
 		}
 	}
 
@@ -103,6 +112,7 @@
 		if(image.src = "Style/bulbon.gif"){
 			image.src = "Style/bulboff.gif";
 			bStates[num-1] = 0;
+			socket.emit('bStates', bStates.toString().replace(/,/g, ''));
 		}
 	}
 </script>
