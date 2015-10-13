@@ -32,8 +32,8 @@ io.on('connection', function(socket){
   });
 });
 
-http.listen(3001, function(){
-  console.log('listening on *:3001');
+http.listen(80, function(){
+  console.log('listening on *:80');
 });
 
 sp.on("open", function () {
