@@ -31,10 +31,10 @@ app.get('/buttons.css',function(req, res){
 });
 
 io.on('connection', function(socket){
-  console.log('luminaire connected');
+  console.log('client connected');
   io.emit('updated bStates', LEDStatus);
   socket.on('disconnect', function(){
-    console.log('luminaire disconnected');
+    console.log('client disconnected');
   });
   socket.on('bStates', function(msg){
     LEDStatus = msg;
@@ -50,18 +50,9 @@ http.listen(3000, function(){
 
 sp.on("open", function () {
   console.log('open');
-  sp.on('data', function(data) {
-  //  console.log('data received: ' + data);
-  //  console.log('LED1 Status: ' + data[0]);
-  //  console.log('LED2 Status: ' + data[1]);
-  //  console.log('LED3 Status: ' + data[2]);
-  //  console.log('LED4 Status: ' + data[3]);
-      io.emit('updated bStates', data);
-      LEDStatus = data;
+  sp.on('data', function(receivedStatus) {
+      io.emit('updated bStates', receivedStatus);
+      console.log('received: ' + receivedStatus);
+      LEDStatus = receivedStatus;
   });
-
-  //sp.write(LEDStatus, function(err, results) {
-  //    console.log('err ' + err);
-  //    console.log('results ' + results);
-  //});
 });
