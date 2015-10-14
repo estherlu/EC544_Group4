@@ -19,6 +19,17 @@ app.get('/', function(req, res){
   res.sendfile('index.html');
 });
 
+app.use('/Button', express.static(__dirname + '/Button'));
+app.use('/Style', express.static(__dirname + '/Style'));
+
+app.get('/style.css',function(req, res){
+  res.sendfile('style.css');
+});
+
+app.get('/buttons.css',function(req, res){
+  res.sendfile('buttons.css');
+});
+
 io.on('connection', function(socket){
   console.log('luminaire connected');
   socket.on('disconnect', function(){
