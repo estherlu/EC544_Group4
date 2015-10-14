@@ -3,7 +3,17 @@
 	http://www.free-css-templates.com
 		
 */
-
+@media screen and (max-width: 800px) {
+  #container, #header, #content, #footer {
+    float: none;
+    width: auto;
+  }
+  img{
+	  height:50%;
+	  left:3%;
+	  margin-top:10px;
+  }
+}
 body { 
 	padding: 0; 
 	margin: 0; 
