@@ -36,10 +36,10 @@ io.on('connection', function(socket){
     console.log('luminaire disconnected');
   });
   socket.on('bStates', function(msg){
-    //io.emit('bStates', msg);
     LEDStatus = msg;
     sp.write(msg + "\n");
     console.log('message: ' + msg); // + msg
+    io.emit('updated bStates', msg);
   });
 });
 
@@ -49,15 +49,15 @@ http.listen(80, function(){
 
 sp.on("open", function () {
   console.log('open');
-  //sp.on('data', function(data) {
+  sp.on('data', function(data) {
   //  console.log('data received: ' + data);
   //  console.log('LED1 Status: ' + data[0]);
   //  console.log('LED2 Status: ' + data[1]);
   //  console.log('LED3 Status: ' + data[2]);
   //  console.log('LED4 Status: ' + data[3]);
-  //  io.emit("status", "An XBee says: " + data);
-    //LEDStatus = data;
-  //});
+      io.emit('updated bStates', data);
+      LEDStatus = data;
+  });
 
   //sp.write(LEDStatus, function(err, results) {
   //    console.log('err ' + err);
