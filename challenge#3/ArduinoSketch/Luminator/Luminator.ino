@@ -11,42 +11,47 @@ void setup() {
   pinMode(5, OUTPUT);
   pinMode(6, OUTPUT);
   pinMode(7, OUTPUT);
+
+   //read initial status of LEDs and send them to server
+  led1 = digitalRead(4);   //Read the status of LED1, on pin 4
+  led2 = digitalRead(5);   //Read the status of LED2, on pin 5
+  led3 = digitalRead(6);   //Read the status of LED3, on pin 6
+  led4 = digitalRead(7);   //Read the status of LED4, on pin 7
+
+  if (digitalRead(4) == HIGH)  
+    led1 = 1;
+  else
+    led1 = 0;
+
+  if (digitalRead(5) == HIGH)  
+    led2 = 1;
+  else
+    led2 = 0;
+
+  if (digitalRead(6) == HIGH)  
+    led3 = 1;
+  else
+    led3 = 0;
+
+  if (digitalRead(7) == HIGH)  
+    led4 = 1;
+  else
+    led4 = 0;
+
+
+    
+  char buf[4];
+  sprintf(buf, "%d%d%d%d\n", led1, led2, led3, led4); // puts string into buffer
+  Serial.write (buf);
+  
+  XBee.write(buf);  
+  delay(2000);
 }
 
 // the loop function runs over and over again forever
 void loop() {
 
-    //read initial status of LEDs and send them to server
-    led1 = digitalRead(4);   //Read the status of LED1, on pin 4
-    led2 = digitalRead(5);   //Read the status of LED2, on pin 5
-    led3 = digitalRead(6);   //Read the status of LED3, on pin 6
-    led4 = digitalRead(7);   //Read the status of LED4, on pin 7
-  
-    if (digitalRead(4) == HIGH)  
-      led1 = 1;
-    else
-      led1 = 0;
-  
-    if (digitalRead(5) == HIGH)  
-      led2 = 1;
-    else
-      led2 = 0;
-  
-    if (digitalRead(6) == HIGH)  
-      led3 = 1;
-    else
-      led3 = 0;
-  
-    if (digitalRead(7) == HIGH)  
-      led4 = 1;
-    else
-      led4 = 0;
-  
-    //Convert Status into string and send it via XBee
-    char buf[4];
-    sprintf(buf, "%d%d%d%d\n", led1, led2, led3, led4); // puts string into buffer
-    XBee.write(buf);  
-    delay(1000);
+   
 
     // Serial.println("Enter 1 for On and 0 for OFF");
     //Parse the LED Status string received from the server
@@ -124,7 +129,7 @@ void loop() {
       }
 
 
-      delay(1000);
+      delay(2000);
   }
 }
 

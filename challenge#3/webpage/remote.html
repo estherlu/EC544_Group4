@@ -7,34 +7,42 @@
 		div.LED1 {
 		    position: absolute;
 		    top: 20%;
-		    left: 3%;
-		    width: 45%;
+		    left: 10%;
+		    width: 35%;
 		    height: 35%;
-		    background-color:rgba(0,0,0,0.3)
+		    background-color:rgba(0,0,0,0.5);
+						border-radius:9px;
+
 		}
 		div.LED2 {
 		    position: absolute;
 		    top: 20%;
-		    left: 51%;
-		    width: 45%;
+		    left: 53%;
+		    width: 35%;
 		    height: 35%;
-		    background-color:rgba(0,0,0,0.3)
+		    background-color:rgba(0,0,0,0.5);
+						border-radius:9px;
+
 		}
 		div.LED3 {
 		    position: absolute;
 		    top: 60%;
-		    left: 3%;
-		    width: 45%;
+		    left: 10%;
+		    width: 35%;
 		    height: 35%;
-		    background-color:rgba(0,0,0,0.3)
+		    background-color:rgba(0,0,0,0.5);
+						border-radius:9px;
+
 		}
 		div.LED4 {
 		    position: absolute;
 		    top: 60%;
-		    left: 51%;
-		    width: 45%;
+		    left: 53%;
+		    width: 35%;
 		    height: 35%;
-		    background-color:rgba(0,0,0,0.3)
+		    background-color:rgba(0,0,0,0.5);
+						border-radius:9px;
+
 		}
 	</style>
 </head>
@@ -42,34 +50,36 @@
 <div style="background-color:rgba(0,0,0,0.5); height:80px; font-size:18px; font-family:Arial, Helvetica, sans-serif; color:rgba(255,255,255,1)">
   <h1 align="middle">Group 4</h1>
 </div>
+<div class="content">
+
 <div class="LED1">
-	<h3 align="middle" 	style="font-size:28px; color:rgba(255,255,255,1); margin-top:10px">LED1</h3>
-	<img id="myBulb1" onload="initBulb('myBulb1',1)" src="Style/bulbon.gif" height="75%"  style="position: relative; LEFT: 27%; margin-top:10px">
-	<button onClick="onBulb('myBulb1', 1)" style="position: absolute; top:35%; left: 70%" class="pure-button pure-button-primary" align ="top">on</button>
-	<button onClick="offBulb('myBulb1', 1)" style="position: absolute; top:50%; left: 70%" class="pure-button" align ="top">off</button>
+	<h3 align="left" 	style="font-size:28px; color:rgba(255,255,255,1); margin-top:10px; margin-left:10px">LED1</h3>
+	<img id="myBulb1" onload="initBulb('myBulb1',1)" src="Style/bulbon.gif" height="55%"  style="position: relative; LEFT: 12%; margin-top:25px">
+	<button onClick="onBulb('myBulb1', 1)" style="position: absolute; top:87%; left: 25%" class="pure-button pure-button-primary" align ="top">on</button>
+	<button onClick="offBulb('myBulb1', 1)" style="position: absolute; top:87%; left: 55%" class="pure-button" align ="top">off</button>
 </div>
 
 <div class="LED2">
-	<h3 align="middle" 	style="font-size:28px; color:rgba(255,255,255,1); margin-top:10px">LED2</h3>
-	<img id="myBulb2" onload="initBulb('myBulb2',2)" src="Style/bulbon.gif" height="75%" style="position: relative; LEFT: 27%; margin-top:10px">
-	<button onClick="onBulb('myBulb2', 2)" style="position: absolute; top:35%; left: 70%" class="pure-button pure-button-primary" align ="top">on</button>
-	<button onClick="offBulb('myBulb2', 2)" style="position: absolute; top:50%; left: 70%" class="pure-button" align ="top">off</button>
+	<h3 align="left" 	style="font-size:28px; color:rgba(255,255,255,1); margin-top:10px; margin-left:10px">LED2</h3>
+	<img id="myBulb2" onload="initBulb('myBulb2',2)" src="Style/bulbon.gif" height="55%" style="position: relative; LEFT: 12%; margin-top:25px">
+	<button onClick="onBulb('myBulb2', 2)" style="position: absolute; top:87%; left: 25%" class="pure-button pure-button-primary" align ="top">on</button>
+	<button onClick="offBulb('myBulb2', 2)" style="position: absolute; top:87%; left: 55%" class="pure-button" align ="top">off</button>
 </div>
 
 <div class="LED3">
-	<h3 align="middle" 	style="font-size:28px; color:rgba(255,255,255,1); margin-top:10px">LED3</h3>
-	<img id="myBulb3" onload="initBulb('myBulb3',3)" src="Style/bulbon.gif" height="75%" style="position: relative; LEFT: 27%; margin-top:10px">
-	<button onClick="onBulb('myBulb3', 3)" style="position: absolute; top:35%; left: 70%" class="pure-button pure-button-primary" align ="top">on</button>
-	<button onClick="offBulb('myBulb3', 3)" style="position: absolute; top:50%; left: 70%" class="pure-button" align ="top">off</button>
+	<h3 align="left" 	style="font-size:28px; color:rgba(255,255,255,1); margin-top:10px; margin-left:10px">LED3</h3>
+	<img id="myBulb3" onload="initBulb('myBulb3',3)" src="Style/bulbon.gif" height="55%" style="position: relative; LEFT: 12%; margin-top:25px">
+	<button onClick="onBulb('myBulb3', 3)" style="position: absolute; top:87%; left: 25%" class="pure-button pure-button-primary" align ="top">on</button>
+	<button onClick="offBulb('myBulb3', 3)" style="position: absolute; top:87%; left: 55%" class="pure-button" align ="top">off</button>
 </div>
 
 <div class="LED4">
-	<h3 align="middle" 	style="font-size:28px; color:rgba(255,255,255,1); margin-top:10px">LED4</h3>
-	<img id="myBulb4" onload="initBulb('myBulb',4)" src="Style/bulbon.gif" height="75%" style="position: relative; LEFT: 27%; margin-top:10px">
-	<button onClick="onBulb('myBulb4', 4)" style="position: absolute; top:35%; left: 70%" class="pure-button pure-button-primary" align ="top">on</button>
-	<button onClick="offBulb('myBulb4', 4)" style="position: absolute;top:50%; left: 70%" class="pure-button" align ="top">off</button>
+	<h3 align="left" 	style="font-size:28px; color:rgba(255,255,255,1); margin-top:10px; margin-left:10px">LED4</h3>
+	<img id="myBulb4" onload="initBulb('myBulb',4)" src="Style/bulbon.gif" height="55%" style="position: relative; LEFT: 12%; margin-top:25px">
+	<button onClick="onBulb('myBulb4', 4)" style="position: absolute; top:87%; left: 25%" class="pure-button pure-button-primary" align ="top">on</button>
+	<button onClick="offBulb('myBulb4', 4)" style="position: absolute;top:87%; left: 55%" class="pure-button" align ="top">off</button>
 </div>
-
+</div>
 <script src="/socket.io/socket.io.js"></script>
 <script>
   var socket = io();
