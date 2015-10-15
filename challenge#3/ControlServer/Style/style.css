@@ -18,7 +18,7 @@ a:hover { color: #DA3B3B; background: inherit; text-decoration: underline}
 p {	margin: 5px 0; }
 h1 {	font: bold 5.0vw Arial, Sans-Serif; padding: 3vh 0 3vh 0; margin: 0; letter-spacing: -1px; }
 h2 { font: bold 1.6em Arial, Sans-Serif; letter-spacing: -1px; }
-h3 { padding: 1vh 0; margin:  0; font-size: 2.0vw;}
+h3 { padding: 1vh 0; margin:  0;}
 ul { margin: 0; padding : 0; list-style: none; }
 img { border: 0; }
 hr { height: 1px; border-style: none; color: #d0d0d0; background-color: #C0C0C0; margin: 10px 0; }
