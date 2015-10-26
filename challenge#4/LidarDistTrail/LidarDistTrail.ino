@@ -78,5 +78,9 @@ void loop() {
   Serial.println("|");
 
   // pause before taking the next reading
-  delay(100);   
+  delay(100); 
+  if(inches>=35){
+    //Write the code to stop the motor
+  }
+  }
 }
