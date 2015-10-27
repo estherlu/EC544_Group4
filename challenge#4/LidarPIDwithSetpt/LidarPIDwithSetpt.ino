@@ -17,7 +17,7 @@ int l_0,Fl_0 ;
 int l_1;
 int dist,Firstdist;
 double setPt, Input, Output;
-int Kp = 2;     // initial 2
+int Kp = 1.8;     // initial 2
 int Ki = 0.05;  // initial 0.05
 int Kd = 0.5;   // initial 0.5
 
@@ -94,8 +94,8 @@ void loop() {
   inchesLast = inches;
   
   // print out the decimal result
-  //Serial.print("EZ1: ");
-  //Serial.println(inches,DEC);
+  Serial.print("EZ1: ");
+  Serial.println(inches,DEC);
 
       Wire.beginTransmission((int)LIDARLite_ADDRESS); // transmit to LIDAR-Lite
       Wire.write((int)RegisterMeasure); // sets register pointer to  (0x00)
@@ -128,7 +128,7 @@ void loop() {
 
     // use PID loop
     PIDleft.Compute();
-    wheels.write(130 + Output);
+    wheels.write(110 + Output);
 
     // Print Distance
     
@@ -137,5 +137,5 @@ void loop() {
         //Serial.print(", PID0: ");
         //Serial.println(Output);
     
-    delay(20);
+    delay(100);
   }
