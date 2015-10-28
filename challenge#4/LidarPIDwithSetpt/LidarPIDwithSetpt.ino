@@ -21,7 +21,8 @@ int Kp = 1.8;     // initial 2
 int Ki = 0.05;  // initial 0.05
 int Kd = 0.5;   // initial 0.5
 
-int inchesLast = 0;
+int inchesLast_1 = 0;
+int inchesLast_2 = 0;
 
 PID PIDleft(&Input, &Output, &setPt, Kp, Ki, Kd, DIRECT);
 
@@ -82,20 +83,25 @@ void calibrateESC(){
 
 void loop() {
 
-  int sensor, inches, x;
+  int sensor_1, inches_1, sensor_2, inches_2, x;
   
   // read the analog output of the EZ1 from analog input 0
-  sensor = analogRead(0);
+  sensor_1 = analogRead(0);
+  sensor_2 = analogRead(2);
   
   // convert the sensor reading to inches
-  inches = sensor / 2; //512 = 254 inches, 
-  if (inches <= 15 and inchesLast <= 15) esc.write(90);
+  inches_1 = sensor_1 / 2; //512 = 254 inches,
+  inches_2 = sensor_2 / 2; //512 = 254 inches,
+  
+  if ((inches_1 <= 15 and inchesLast_1 <= 15) || (inches_2 <= 15 and inchesLast_2 <= 15)) esc.write(90);
   else esc.write(75);
-  inchesLast = inches;
+  inchesLast_1 = inches_1;
+  inchesLast_2 = inches_2;
   
   // print out the decimal result
   Serial.print("EZ1: ");
-  Serial.println(inches,DEC);
+  Serial.println(inches_1,DEC);
+  Serial.println(inches_2,DEC);
 
       Wire.beginTransmission((int)LIDARLite_ADDRESS); // transmit to LIDAR-Lite
       Wire.write((int)RegisterMeasure); // sets register pointer to  (0x00)
@@ -118,7 +124,7 @@ void loop() {
         dist |= Wire.read(); // receive low byte as lower 8 bits
       }
       
-          if (dist < 0 || dist > 400) {
+          if (dist < 0 || dist > 130) {
             dist = l_0;
           }
           dist = 0.7 * dist + 0.3 * l_0;
