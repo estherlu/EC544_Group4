@@ -108,7 +108,7 @@ void loop() {
 
   if (XBee.available())
   {
-      int tmp = XBee.read();
+     int tmp = XBee.read();
      if (tmp == 48 || tmp == 49)
      {
         cmnd = tmp;
@@ -127,7 +127,7 @@ void loop() {
      }
   }
 
-  if (cmnd == 49)
+ if (cmnd == 49)
   {
   
     if ((inches_1 <= 15 and inchesLast_1 <= 15) || (inches_2 <= 15 and inchesLast_2 <= 15)) esc.write(90);
@@ -137,8 +137,8 @@ void loop() {
     
     //print out the decimal result
     //Serial.print("EZ1: ");
-    //Serial.println(inches_1,DEC);
-    //Serial.println(inches_2,DEC);
+    Serial.println(inches_1,DEC);
+    Serial.println(inches_2,DEC);
   
     Wire.beginTransmission((int)LIDARLite_ADDRESS); // transmit to LIDAR-Lite
     Wire.write((int)RegisterMeasure); // sets register pointer to  (0x00)
@@ -179,20 +179,21 @@ void loop() {
     //Serial.print(dist);
     //Serial.print(", PID0: ");
     //Serial.println(Output);
-  }
+ }
 
   //Wheel Speed Sensor
-  int in = digitalRead(WSpin);
-  if (pinVal != in) 
-  { 
-      pinVal = in;
-      Serial.println(millis()-t);
+  //int in = digitalRead(WSpin);
+  //if (pinVal != in) 
+  //{ 
+      //pinVal = in;
+      //int out = millis() - t;
+      //t = millis();
+      //XBee.print("Speed: ");
+      //XBee.println(out);
+      //Serial.println(millis()-t);
       //Serial.println(t);
-      Serial.println("------------------");
-      t = millis();
-
-      XBee.write("Speed is:" + millis()-t);
-   }
+      //Serial.println("------------------");
+   //}
    
     delay(100);
   }
