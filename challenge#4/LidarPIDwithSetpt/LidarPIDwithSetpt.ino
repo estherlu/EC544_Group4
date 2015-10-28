@@ -1,10 +1,15 @@
 #include <Wire.h>
+#include <Time.h>
 #include <PID_v1.h>
 #define    LIDARLite_ADDRESS   0x62          // Default I2C Address of LIDAR-Lite.
 #define    RegisterMeasure     0x00          // Register to write to initiate ranging.
 #define    MeasureValue        0x04          // Value to initiate ranging.
 #define    RegisterHighLowB    0x8f          // Register to get both High and Low bytes in 1 call.
 #include <Servo.h>
+
+time_t t = 0;
+int pinVal = 0;
+int WSpin = 13;
  
 Servo wheels; // servo for turning the wheels
 Servo esc; // not actually a servo, but controlled like one!
@@ -34,9 +39,11 @@ void setup() {
    *  you don't need to re-calibrate each time, and you can comment this part out.
    */
   calibrateESC();
-  esc.write(80);
-    
-  Wire.begin(); // Opens & joins the irc bus as master
+
+       pinMode(WSpin, INPUT);
+       t = millis();
+       pinVal = digitalRead(WSpin);
+       Wire.begin(); // Opens & joins the irc bus as master
 
   //initialize linked variables
   Wire.beginTransmission((int)LIDARLite_ADDRESS); // transmit to LIDAR-Lite
@@ -61,13 +68,14 @@ void setup() {
   }    
      
   setPt = Firstdist;
-  Serial.println("First Distance"); 
-  Serial.print(Firstdist);
+  // Serial.println("First Distance"); 
+  //Serial.print(Firstdist);
   PIDleft.SetOutputLimits(-50, 50);
 
   //turn on PID loop
   PIDleft.SetMode(AUTOMATIC);
 
+  esc.write(80);
 }
 
 /* Calibrate the ESC by sending a high signal, then a low, then middle.*/
@@ -99,9 +107,9 @@ void loop() {
   inchesLast_2 = inches_2;
   
   // print out the decimal result
-  Serial.print("EZ1: ");
-  Serial.println(inches_1,DEC);
-  Serial.println(inches_2,DEC);
+ // Serial.print("EZ1: ");
+  //Serial.println(inches_1,DEC);
+  //Serial.println(inches_2,DEC);
 
       Wire.beginTransmission((int)LIDARLite_ADDRESS); // transmit to LIDAR-Lite
       Wire.write((int)RegisterMeasure); // sets register pointer to  (0x00)
@@ -142,6 +150,14 @@ void loop() {
         //Serial.print(dist);
         //Serial.print(", PID0: ");
         //Serial.println(Output);
-    
+      int in = digitalRead(WSpin);
+    if (pinVal != in) { 
+    pinVal = in;
+    Serial.println(millis()-t);
+    //Serial.println(t);
+    Serial.println("------------------");
+    t = millis();
+    }
     delay(100);
+   
   }
