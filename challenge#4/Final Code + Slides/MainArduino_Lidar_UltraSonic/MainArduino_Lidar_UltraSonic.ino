@@ -96,15 +96,15 @@ void calibrateESC(){
 }
 
 void loop() {
-  int sensor_1, inches_1, sensor_2, inches_2, x;
+  int sensor_1, inches_1, /*sensor_2, inches_2,*/ x;
   
   // read the analog output of the EZ1 from analog input 0
-  sensor_1 = analogRead(0);
-  sensor_2 = analogRead(2);
+  //sensor_1 = analogRead(0);
+  //sensor_2 = analogRead(2);
   
-  // convert the sensor reading to inches
+  // convert the ultrasonic sensor reading to inches
   inches_1 = sensor_1 / 2; //512 = 254 inches,
-  inches_2 = sensor_2 / 2; //512 = 254 inches,
+  //inches_2 = sensor_2 / 2; //512 = 254 inches,
 
   if (XBee.available())
   {
@@ -130,15 +130,16 @@ void loop() {
  if (cmnd == 49)
   {
   
-    if ((inches_1 <= 15 and inchesLast_1 <= 15) || (inches_2 <= 15 and inchesLast_2 <= 15)) esc.write(90);
-    else esc.write(75);
+    if ((inches_1 <= 15 and inchesLast_1 <= 15) /*|| (inches_2 <= 15 and inchesLast_2 <= 15)*/) esc.write(90);
+    //else
+    //esc.write(75);
     inchesLast_1 = inches_1;
-    inchesLast_2 = inches_2;
+    //inchesLast_2 = inches_2;
     
     //print out the decimal result
     //Serial.print("EZ1: ");
-    Serial.println(inches_1,DEC);
-    Serial.println(inches_2,DEC);
+    //Serial.println(inches_1,DEC);
+    //Serial.println(inches_2,DEC);
   
     Wire.beginTransmission((int)LIDARLite_ADDRESS); // transmit to LIDAR-Lite
     Wire.write((int)RegisterMeasure); // sets register pointer to  (0x00)
@@ -161,7 +162,7 @@ void loop() {
       dist |= Wire.read(); // receive low byte as lower 8 bits
     }
     
-    if (dist < 0 || dist > 130) {
+    if (dist < 0 || dist > 110) {
       dist = l_0;
     }
     dist = 0.7 * dist + 0.3 * l_0;
@@ -175,8 +176,8 @@ void loop() {
   
      //Print Distance
       
-    //Serial.print("Dist0: ");
-    //Serial.print(dist);
+    Serial.print("Dist0: ");
+    Serial.println(dist);
     //Serial.print(", PID0: ");
     //Serial.println(Output);
  }
