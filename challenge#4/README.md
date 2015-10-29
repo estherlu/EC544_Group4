@@ -10,6 +10,7 @@ We use PID Algorithm on the side and rotorey encoder to sense the color wheel in
 
 ##Challenges & Future Improvements
 <b>Challenges</b>
+
 Choosing the proper sensors to use and interfacing them together on Arduino
 Dealing with limitations of each sensor, calibrating the out puts
 Learning to use PID libraries an testing on combination of PID coefficients
