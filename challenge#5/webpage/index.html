@@ -23,31 +23,47 @@ Released   : 20140322
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <script>
-   var imgObj1 = null;
-   var imgObj2 = null;
-   var imgObj3 = null;
+   var Red = null;
+   var Green = null;
+   var Black = null;
+   var xbeer = null;
+   var xbeel = null;
+   var xbeeb = null;
+
   var i=1;
             function init(){
-			   imgObj1 = document.getElementById('object');
-	           imgObj2 = document.getElementById('object2');
-			   imgObj3 = document.getElementById('object3');
-               imgObj1.style.position= 'absolute'; 
-               imgObj1.style.left ="400px";
-			   imgObj1.style.top="459px";
-			   imgObj2.style.position= 'absolute'; 
-               imgObj2.style.left ="430px";
-			   imgObj2.style.top="459px";
-			   imgObj3.style.position= 'absolute'; 
-               imgObj3.style.left ="460px";
-			   imgObj3.style.top="459px";
+			   Red = document.getElementById('Red');
+	           Green = document.getElementById('Green');
+			   Black = document.getElementById('Black');
+			   xbeer = document.getElementById('right');
+			   xbeel = document.getElementById('left');
+			   xbeeb = document.getElementById('bottom');
+               Red.style.position= 'absolute'; 
+               Red.style.left ="400px";
+			   Red.style.top="459px";
+			   Green.style.position= 'absolute'; 
+               Green.style.left ="430px";
+			   Green.style.top="459px";
+			   Black.style.position= 'absolute'; 
+               Black.style.left ="460px";
+			   Black.style.top="459px";
+			   xbeer.style.position='absolute';
+			   xbeer.style.left="1000px";
+			   xbeer.style.top="459px";
+			   xbeel.style.position='absolute';
+			   xbeel.style.left="310px";
+			   xbeer.style.top="459px";
+			   xbeeb.style.position='absolute';
+			   xbeeb.style.left="310px";
+			   xbeeb.style.top="1000px";
             }
 			function moveRight(){
-				imgObj1.style.left = parseInt(imgObj1.style.left) + 20 + 'px';
-				imgObj1.style.top = parseInt(imgObj1.style.top) + 10 + 'px';
-				imgObj2.style.left = parseInt(imgObj2.style.left) + 20 + 'px';
-				imgObj2.style.top = parseInt(imgObj2.style.top) + 10 + 'px';
-				imgObj3.style.left = parseInt(imgObj3.style.left) + 20 + 'px';
-				imgObj3.style.top = parseInt(imgObj3.style.top) + 10 + 'px';
+				Red.style.left = parseInt(Red.style.left) + 20 + 'px';
+				Red.style.top = parseInt(Red.style.top) + 10 + 'px';
+				Green.style.left = parseInt(Green.style.left) + 20 + 'px';
+				Green.style.top = parseInt(Green.style.top) + 10 + 'px';
+				Black.style.left = parseInt(Black.style.left) + 20 + 'px';
+				Black.style.top = parseInt(Black.style.top) + 10 + 'px';
 			}
 		
             window.onload = init;
@@ -74,10 +90,13 @@ Released   : 20140322
 	</div>
 </div>
 <div class="wrapper">
-	<div style="margin:0 auto; width:700px;"><img id="object" class="point" src="images/point.png" alt="CAR" position="absolute" height="30px" width="30px"/>
-	<img id="object2" class="point" src="images/point2.png" alt="CAR2" position="absolute" height="30px" width="30px"/>
-	<img id="object3" class="point" src="images/point3.png" alt="CAR3" position="absolute" height="30px" width="30px"/>
-	<img src="images/Room.png" margin-top="30px" position="relative" width="700" height="490" alt="" /></div>
+	<div style="margin:0 auto; width:1000px;"><img id="Red" class="point" src="images/Red.png" alt="CAR" position="absolute" height="30px" width="30px"/>
+	<img id="Green" class="point" src="images/Green.png" alt="CAR2" position="absolute" height="30px" width="30px"/>
+	<img id="Black" class="point" src="images/Black.png" alt="CAR3" position="absolute" height="30px" width="30px"/>
+    <img id="left" class="point" src="images/Xbeel.jpeg" alt="XBEE" position="absolute" height="30px" width="30px"/>
+    <img id="right" class="point" src="images/Xbeer.jpeg" alt="XBEE" position="absolute" height="30px" width="30px"/>
+    <img id="bottom" class="point" src="images/Xbeel.jpeg" alt="XBEE" position="absolute" height="30px" width="30px"/>
+	<img src="images/Room.png" margin-top="30px" position="relative" width="1000" height="700" alt="" /></div>
 	<div id="welcome" class="container">
     	
 <div class="title">
