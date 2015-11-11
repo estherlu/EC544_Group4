@@ -23,15 +23,31 @@ Released   : 20140322
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
   <script>
-   var imgObj = null;
+   var imgObj1 = null;
+   var imgObj2 = null;
+   var imgObj3 = null;
   var i=1;
             function init(){
-			   imgObj = document.getElementById('object');
-               imgObj.style.position= 'absolute'; 
-               imgObj.style.left ="400px";
+			   imgObj1 = document.getElementById('object');
+	           imgObj2 = document.getElementById('object2');
+			   imgObj3 = document.getElementById('object3');
+               imgObj1.style.position= 'absolute'; 
+               imgObj1.style.left ="400px";
+			   imgObj1.style.top="459px";
+			   imgObj2.style.position= 'absolute'; 
+               imgObj2.style.left ="430px";
+			   imgObj2.style.top="459px";
+			   imgObj3.style.position= 'absolute'; 
+               imgObj3.style.left ="460px";
+			   imgObj3.style.top="459px";
             }
 			function moveRight(){
-				imgObj.style.left = parseInt(imgObj.style.left) + 20 + 'px';
+				imgObj1.style.left = parseInt(imgObj1.style.left) + 20 + 'px';
+				imgObj1.style.top = parseInt(imgObj1.style.top) + 10 + 'px';
+				imgObj2.style.left = parseInt(imgObj2.style.left) + 20 + 'px';
+				imgObj2.style.top = parseInt(imgObj2.style.top) + 10 + 'px';
+				imgObj3.style.left = parseInt(imgObj3.style.left) + 20 + 'px';
+				imgObj3.style.top = parseInt(imgObj3.style.top) + 10 + 'px';
 			}
 		
             window.onload = init;
@@ -58,7 +74,10 @@ Released   : 20140322
 	</div>
 </div>
 <div class="wrapper">
-	<div style="margin:0 auto; width:700px;"><img id="object" class="point" src="images/point.png" alt="CAR" position="absolute" height="30px" width="30px"/><img src="images/Room.png" margin-top="30px" position="relative" width="700" height="490" alt="" /></div>
+	<div style="margin:0 auto; width:700px;"><img id="object" class="point" src="images/point.png" alt="CAR" position="absolute" height="30px" width="30px"/>
+	<img id="object2" class="point" src="images/point2.png" alt="CAR2" position="absolute" height="30px" width="30px"/>
+	<img id="object3" class="point" src="images/point3.png" alt="CAR3" position="absolute" height="30px" width="30px"/>
+	<img src="images/Room.png" margin-top="30px" position="relative" width="700" height="490" alt="" /></div>
 	<div id="welcome" class="container">
     	
 <div class="title">
