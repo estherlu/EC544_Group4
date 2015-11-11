@@ -160,42 +160,16 @@
 /* Image Style                                                                   */
 /*********************************************************************************/
 
-	.image
-	{
-		display: inline-block;
-		border: 1px solid rgba(0,0,0,.1);
-	}
+  img.displayed{
+   position:relative; 
+   top:0;
+   left:0;
 	
-	.image img
-	{
-		display: block;
-		width: 100%;
-	}
-	
-	.image-full
-	{
-		display: block;
-		width: 100%;
-		margin: 0 0 3em 0;
-	}
-	
-	.image-left
-	{
-		float: left;
-		margin: 0 2em 2em 0;
-	}
-	
-	.image-centered
-	{
-		display: block;
-		margin: 0 0 2em 0;
-	}
-	
-	.image-centered img
-	{
-		margin: 0 auto;
-		width: auto;
-	}
+  }
+  img.point,point2,point3{
+	position: absolute;
+	top: 459px;
+  }
 
 /*********************************************************************************/
 /* List Styles                                                                   */
