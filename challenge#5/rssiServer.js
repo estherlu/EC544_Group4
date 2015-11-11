@@ -7,27 +7,95 @@ var XBeeAPI = new xbee_api.XBeeAPI({
   api_mode: 2
 });
 
-var math = require('mathjs');
-
 var portName = process.argv[2];
 
 var sampleDelay = 3000;
 
-/*var beacon1_rssi = 0;
-var beacon2_rssi = 0;
-var beacon3_rssi = 0;
-var beacon4_rssi = 0;
-//var obj_x_coord = 0;
-//var obj_y_coord = 0;*/
+var app = require('express')();
+var express=require('express');
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
-var d = [0,0,0,0];
+var trainningSet = [[56,56,54,49], 
+[73,49,55,51], 
+[79,46,37,41], 
+[71,47,40,49], 
+[74,49,50,35], 
+[76,43,48,31], 
+[71,41,55,40], 
+[63,45,45,45], 
+[73,45,45,37], 
+[73,46,42,35], 
+[69,41,42,34], 
+[69,38,50,34], 
+[69,45,38,48], 
+[69,45,43,48], 
+[72,50,42,51], 
+[71,45,42,46], 
+[73,38,48,51], 
+[78,47,39,50], 
+[67,43,42,44], 
+[67,55,51,49], 
+[74,43,42,45], 
+[77,50,52,43], 
+[75,43,37,46], 
+[78,45,46,41], 
+[70,45,44,50], 
+[67,42,40,43], 
+[72,48,45,42], 
+[76,40,47,46], 
+[78,53,45,40], 
+[76,45,41,39], 
+[71,40,45,47], 
+[72,39,44,50], 
+[70,38,48,41], 
+[79,39,41,46], 
+[75,42,48,48], 
+[73,38,49,46], 
+[73,39,50,40], 
+[74,37,44,43], 
+[75,39,48,45], 
+[77,43,45,48], 
+[77,37,39,48], 
+[76,39,37,51], 
+[75,41,44,47], 
+[70,37,44,48], 
+[74,45,48,50], 
+[76,40,42,47], 
+[72,39,35,40], 
+[78,50,37,53], 
+[76,31,54,69], 
+[74,41,42,57], 
+[76,42,48,52], 
+[77,41,46,54], 
+[77,45,33,49], 
+[78,45,31,50]]
+var predictions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54]
+
+app.use('/fonts', express.static(__dirname + 'webpage/fonts'));
+app.use('/images', express.static(__dirname + '/webpage/images'));
+app.use('/', express.static(__dirname + '/webpage'));
+
+
+app.get('/localization', function(req, res){
+  res.sendfile('webpage/index.html');
+});
+
+
+
 
 
 //Note that with the XBeeAPI parser, the serialport's "data" event will not fire when messages are received!
 portConfig = {
-	baudRate: 9600,
+  baudRate: 9600,
   parser: XBeeAPI.rawParser()
 };
+
+http.listen(3000, function(){
+  //listen on localhost port 3000
+  console.log('listening on *:3000');
+});
+
 
 var sp;
 sp = new SerialPort.SerialPort(portName, portConfig);
@@ -51,141 +119,10 @@ sp.on("open", function () {
   console.log('open');
   requestRSSI();
   setInterval(requestRSSI, sampleDelay);
-  console.log("Requested RSSI");
 });
-
-N = 4; // Number of Beacons
-
-var D = math.matrix(math.zeros([N, 2]));
-var B = math.zeros(N, 3);
-var b = math.zeros(N);
 
 XBeeAPI.on("frame_object", function(frame) {
   if (frame.type == 144){
     console.log("Beacon ID: " + frame.data[1] + ", RSSI: " + (frame.data[0]));
-    if (frame.data[1] == '1')
-    { 
-      d[0] = (d[0]+(parseInt(frame.data[0]) - 31) * 20)/2; //cm
-      //math.subset(B, math.index(0, 0), 1); //B(0,0)
-      B.subset(math.index(0, 0), 0); //x-coord of Beacon 0
-      B.subset(math.index(0, 1), 0); //y
-      B.subset(math.index(0, 2), d[0]); // RSSI
-      //console.log(parseInt(frame.data[0]));
-      //console.log(B.subset(math.index(0, 2)));
-    }
-    if (frame.data[1] == '2') 
-    { 
-      d[1] = (d[1]+(parseInt(frame.data[0]) - 31) * 20)/2
-      B.subset(math.index(1, 0), 0); //x-coord of Beacon 1
-      B.subset(math.index(1, 1), 400); //y
-      B.subset(math.index(1, 2), d[1]); // RSSI
-
-    }
-    if (frame.data[1] == '3')
-    {
-      d[2] = (d[2]+(parseInt(frame.data[0]) - 31) * 20)/2
-      B.subset(math.index(2, 0), 200); //x-coord of Beacon 2
-      B.subset(math.index(2, 1), 0); //y
-      B.subset(math.index(2, 2), d[2]); // RSSI
-
-    }
-
-     B.subset(math.index(2, 0), 400); //x-coord of Beacon 2
-    B.subset(math.index(2, 1), 0); //y
-     B.subset(math.index(2, 2), 100);
-
-    if (frame.data[1] == '4')
-    {
-      d[3] = (d[3]+(parseInt(frame.data[0]) - 31) * 20)/2
-      B.subset(math.index(3, 0), 400); //x-coord of Beacon 0
-      B.subset(math.index(3, 1), 400); //y
-      B.subset(math.index(3, 2), d[3]); // RSSI
-    }
-    B.subset(math.index(3, 0), 400); //x-coord of Beacon 0
-      B.subset(math.index(3, 1), 400); //y
-      //B.subset(math.index(3, 2), parseInt(frame.data[0])); // RSSI
-      B.subset(math.index(3, 2), 100);
-    //console.log(B);
-
-    /*Apply calculations*/
-    for (var i=0; i<3; i++)
-  {
-    var temp1 = B.subset(math.index(0, 0)) - B.subset(math.index(i+1, 0));
-    var temp2 = B.subset(math.index(0, 1)) - B.subset(math.index(i+1, 1));
-    var temp3 = math.square(B.subset(math.index(0, 0))) - math.square(B.subset(math.index(i+1, 0))) + math.square(B.subset(math.index(0, 1))) 
-                - math.square(B.subset(math.index(i+1, 1))) - math.square(B.subset(math.index(0, 2))) + math.square(B.subset(math.index(i+1, 2)));
-    D.subset(math.index(i, 0), temp1);
-    D.subset(math.index(i, 1), temp2);
-
-    b.subset(math.index(i), temp3); 
-  }
-
-
-  D = math.multiply(D, 2);
-  //console.log("D " + D);
-
-  var DT = math.transpose(D);
-
-  var Q = math.multiply(math.inv(math.multiply(DT, D)), math.multiply(DT, b));
-
-  //console.log("DT " + DT);
-  console.log("Q " + Q);
   }
 });
-/*
-
-
-for (var i=0; i<3; i++)
-{
-  var temp1 = math.subset(B, math.index(0, 0)) - math.subset(B, math.index(i+1, 0));
-  var temp2 = math.subset(B, math.index(0, 1)) - math.subset(B, math.index(i+1, 1));
-  var temp3 = math.square(math.subset(B, math.index(0, 0))) - math.square(math.subset(B, math.index(i+1, 0))) + math.square(math.subset(B, math.index(0, 1))) 
-              - math.square(math.subset(B, math.index(i+1, 1))) - math.square(math.subset(B, math.index(0, 2))) + math.square(math.subset(B, math.index(i+1, 2)));
-  math.subset(D, math.index(i, 0), temp1);
-  math.subset(D, math.index(i, 1), temp2);
-
-  math.subset(b, math.index(i), temp3); 
-}
-
-math.multiply(D, 2);
-
-var DT = math.transpose(D);
-
-//var Q = math.multiply(math.inv(math.multiply(DT, D)), math.multiply(DT, b));
- 
-*/
-/*D = zeros(BeaconN -1, 2);
-b = zeros(BeaconN -1, 1);
-for i = 1 : BeaconN -1
-    D(i, :) = [ B(1,1) - B(i+1, 1), B(1, 2) - B(i+1, 2) ];
-    b(i) = B(1,1)^2 - B(i+1,1)^2 + B(1,2)^2 - B(i+1,2)^2 - B(1,3)^2 + B(i+1,3)^2;
-end
-D = 2 * D;
-DT = D';
-Q = (DT * D) \ DT * b;
-x = Q(1);
-y = Q(2);
-
-
-
-N = 4;
-D = [0,0,0,0,0,0,0,0];
-b = [0,0,0,0];
-
-for (int i = 1; i<=3; i++)
-{
-  D[2*i] =2* ;
-  D[2*i + 1] = 2*;
-  b[i];
-}
-
-b = zeros(BeaconN -1, 1);
-for i = 1 : BeaconN -1
-    D(i, :) = [ B(1,1) - B(i+1, 1), B(1, 2) - B(i+1, 2) ];
-    b(i) = B(1,1)^2 - B(i+1,1)^2 + B(1,2)^2 - B(i+1,2)^2 - B(1,3)^2 + B(i+1,3)^2;
-end
-D = 2 * D;
-DT = D';
-Q = (DT * D) \ DT * b;
-x = Q(1);
-y = Q(2);*/
