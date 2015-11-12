@@ -19,13 +19,31 @@ Released   : 20140322
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Quicksand:400,700|Questrial" rel="stylesheet" />
 <link href="default.css" rel="stylesheet" type="text/css" media="all" />
 <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+script src="/socket.io/socket.io.js"></script>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-  <script>
+
+
+ <script>
+  var socket = io();
+  var location1 = [0,0];
+  var location2 = [0,0]; 
+  var location3 = [0,0];
+
+
+  socket.on('location', function(location){
+  	location3 = location2;
+  	location2 = location1; 
+    location1 = [parseInt(location) / 6 * 25, ((parseInt(location) % 6) - 1) * 28];
+  });
+</script>
+
+<script>
    var Red = null;
-   var Green = null;
-   var Black = null;
+   //var Green = null;
+   //var Black = null;
    var xbeer = null;
    var xbeel = null;
    var xbeeb = null;
@@ -33,8 +51,8 @@ Released   : 20140322
   var i=1;
             function init(){
 			   Red = document.getElementById('Red');
-	           Green = document.getElementById('Green');
-			   Black = document.getElementById('Black');
+	           //Green = document.getElementById('Green');
+			   //Black = document.getElementById('Black');
 			   xbeer = document.getElementById('right');
 			   xbeel = document.getElementById('left');
 			   xbeeb = document.getElementById('bottom');
@@ -42,12 +60,12 @@ Released   : 20140322
                Red.style.position= 'absolute'; 
                Red.style.left ="210px";
 			   Red.style.top="250px";
-			   Green.style.position= 'absolute'; 
-               Green.style.left ="240px";
-			   Green.style.top="250px";
-			   Black.style.position= 'absolute'; 
-               Black.style.left ="270px";
-			   Black.style.top="250px";
+			   //Green.style.position= 'absolute'; 
+               //Green.style.left ="240px";
+			   //Green.style.top="250px";
+			   //Black.style.position= 'absolute'; 
+               //Black.style.left ="270px";
+			   //Black.style.top="250px";
 			   xbeer.style.position='absolute';
 			   xbeer.style.left="880px";
 			   xbeer.style.top="800px";
@@ -62,12 +80,14 @@ Released   : 20140322
 			   xbeeb2.style.top="250px";
             }
 			function moveRight(){
-				Red.style.left = parseInt(Red.style.left) + 20 + 'px';
-				Red.style.top = parseInt(Red.style.top) + 10 + 'px';
-				Green.style.left = parseInt(Green.style.left) + 20 + 'px';
-				Green.style.top = parseInt(Green.style.top) + 10 + 'px';
-				Black.style.left = parseInt(Black.style.left) + 20 + 'px';
-				Black.style.top = parseInt(Black.style.top) + 10 + 'px';
+				Red.style.left = 310 + Math.round(location1[0] * 2.95) + 'px';
+				Red.style.top = 459 + Math.round(location1[1] * 2.43) + 'px';
+				//Red.style.left = parseInt(Red.style.left) + 20 + 'px';
+				//Red.style.top = parseInt(Red.style.top) + 10 + 'px';
+				//Green.style.left = parseInt(Green.style.left) + 20 + 'px';
+				//Green.style.top = parseInt(Green.style.top) + 10 + 'px';
+				//Black.style.left = parseInt(Black.style.left) + 20 + 'px';
+				//Black.style.top = parseInt(Black.style.top) + 10 + 'px';
 			}
 		
             window.onload = init;
@@ -94,8 +114,8 @@ Released   : 20140322
 <div class="wrapper">
 	<img id="room" class="displayed" src="images/Room.png" margin-top="30px" position="relative" width="1000" height="700" alt="" /></div>
 	<div style="margin:0 auto; width:1000px;"><img id="Red" class="point" src="images/Red.png" alt="CAR" position="absolute" height="30px" width="30px"/>
-	<img id="Green" class="point" src="images/Green.png" alt="CAR2" position="absolute" height="30px" width="30px"/>
-	<img id="Black" class="point" src="images/Black.png" alt="CAR3" position="absolute" height="30px" width="30px"/>
+	<!--img id="Green" class="point" src="images/Green.png" alt="CAR2" position="absolute" height="30px" width="30px"/-->
+	<!--img id="Black" class="point" src="images/Black.png" alt="CAR3" position="absolute" height="30px" width="30px"/-->
     <img id="left" class="point" src="images/Xbeel.jpeg" alt="XBEE" position="absolute" height="30px" width="30px"/>
     <img id="right" class="point" src="images/Xbeer.jpeg" alt="XBEE" position="absolute" height="30px" width="30px"/>
     <img id="bottom" class="point" src="images/Xbeel.jpeg" alt="XBEE" position="absolute" height="30px" width="30px"/>
