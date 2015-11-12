@@ -55,7 +55,7 @@
 	.container
 	{
 		margin: 0px auto;
-		width: 1200px;
+		width: 100%;
 	}
 	
 
@@ -334,6 +334,13 @@
 		padding: 1em 100px 0em 100px;
 		text-align: center;
 	}
+
+	#welcome h1
+	{
+		padding: 1em 100px 0em 100px;
+		text-align: center;
+		font-size: 
+	}
 	
 	#welcome .content
 	{
@@ -394,9 +401,18 @@
 	#footer
 	{
 		overflow: hidden;
-		padding: 5em 0em;
+		padding: 2em 0em 5em 0em;
 		background: #E3F0F7;
 		text-align: center;
+
+	}
+
+	#footer h1
+	{
+		display: block;
+		margin-bottom: 0.20em;
+		padding: 0.20em 0.9em;
+		font-size: 1.5em;
 	}
 
 
@@ -424,111 +440,3 @@
 	}
 	
 
-/*********************************************************************************/
-/* Three Columns                                                                 */
-/*********************************************************************************/
-
-	#three-column
-	{
-		overflow: hidden;
-		margin-top: 5em;
-		padding-top: 1em;
-		border-top: 1px solid rgba(0,0,0,0.2);
-		text-align: center;
-	}
-	
-	#three-column h2
-	{
-		margin: 1em 0em;
-		font-size: 1.5em;
-		font-weight: 700;
-	}
-	
-	#three-column .icon
-	{
-		position: relative;
-		display: block;
-		margin: 0px auto 0.80em auto;
-		background: none;
-		line-height: 150px;
-		font-size: 4em;
-		width: 150px;
-		height: 150px;
-		border-radius: 100px;
-		border: 6px solid #67128F;
-		text-align: center;
-		color: #FFF;
-		
-	}
-		
-	#three-column #tbox1,
-	#three-column #tbox2,
-	#three-column #tbox3
-	{
-		float: left;
-		width: 320px;
-		padding: 80px 40px 80px 40px;
-	}
-	
-	#three-column .title
-	{
-		text-align: center;
-	}
-	
-	#three-column .title h2
-	{
-		font-size: 1.60em;
-	}
-	
-	#three-column .title .byline
-	{
-		padding-top: 0.50em;
-		font-size: 0.90em;
-		color: #858585;
-	}
-
-	#three-column .arrow-down
-	{
-		border-top-color: #292929;
-	}
-	
-	
-	ul.tools
-	{
-		margin: 0;
-		padding: 0em 0em 0em 0em;
-		list-style: none;
-	}
-	
-	ul.tools li
-	{
-		display: inline-block;
-		padding: 0em .2em;
-		font-size: 4em;
-	}
-	
-	ul.tools li span
-	{
-		display: none;
-		margin: 0;
-		padding: 0;
-	}
-	
-	ul.tools li a
-	{
-		color: #FFF;
-	}
-	
-	ul.tools li a:before
-	{
-		display: inline-block;
-		background: #1ABC9C;
-		width: 120px;
-		height: 120px;
-		border-radius: 50%;
-		line-height: 120px;
-		text-align: center;
-		color: #FFFFFF;
-	}
-	
-	
