@@ -38,24 +38,28 @@ Released   : 20140322
 			   xbeer = document.getElementById('right');
 			   xbeel = document.getElementById('left');
 			   xbeeb = document.getElementById('bottom');
+			   xbeeb2 = document.getElementById('bottom2');
                Red.style.position= 'absolute'; 
-               Red.style.left ="400px";
-			   Red.style.top="459px";
+               Red.style.left ="210px";
+			   Red.style.top="250px";
 			   Green.style.position= 'absolute'; 
-               Green.style.left ="430px";
-			   Green.style.top="459px";
+               Green.style.left ="240px";
+			   Green.style.top="250px";
 			   Black.style.position= 'absolute'; 
-               Black.style.left ="460px";
-			   Black.style.top="459px";
+               Black.style.left ="270px";
+			   Black.style.top="250px";
 			   xbeer.style.position='absolute';
-			   xbeer.style.left="1000px";
-			   xbeer.style.top="459px";
+			   xbeer.style.left="880px";
+			   xbeer.style.top="800px";
 			   xbeel.style.position='absolute';
-			   xbeel.style.left="310px";
-			   xbeer.style.top="459px";
+			   xbeel.style.left="180px";
+			   xbeel.style.top="250px";
 			   xbeeb.style.position='absolute';
-			   xbeeb.style.left="310px";
-			   xbeeb.style.top="1000px";
+			   xbeeb.style.left="180px";
+			   xbeeb.style.top="800px";
+			   xbeeb2.style.position='absolute';
+			   xbeeb2.style.left="880px";
+			   xbeeb2.style.top="250px";
             }
 			function moveRight(){
 				Red.style.left = parseInt(Red.style.left) + 20 + 'px';
@@ -76,8 +80,7 @@ Released   : 20140322
 <div id="header-wrapper">
 	<div id="header" class="container">
 		<div id="logo">
-        	<span class="icon icon-cog"></span>
-			<h1><a href="#">Group 4</a></h1>
+			<h1><a href="#">Group 4</a><span style="font-size:0.6em;">--challenge 5 </span></h1>
 			<h2><a href="#">Challege 5</a></h2>
 		</div>
 		<!--div id="menu">
@@ -90,13 +93,15 @@ Released   : 20140322
 	</div>
 </div>
 <div class="wrapper">
+	<img id="room" class="displayed" src="images/Room.png" margin-top="30px" position="relative" width="1000" height="700" alt="" /></div>
 	<div style="margin:0 auto; width:1000px;"><img id="Red" class="point" src="images/Red.png" alt="CAR" position="absolute" height="30px" width="30px"/>
 	<img id="Green" class="point" src="images/Green.png" alt="CAR2" position="absolute" height="30px" width="30px"/>
 	<img id="Black" class="point" src="images/Black.png" alt="CAR3" position="absolute" height="30px" width="30px"/>
     <img id="left" class="point" src="images/Xbeel.jpeg" alt="XBEE" position="absolute" height="30px" width="30px"/>
     <img id="right" class="point" src="images/Xbeer.jpeg" alt="XBEE" position="absolute" height="30px" width="30px"/>
     <img id="bottom" class="point" src="images/Xbeel.jpeg" alt="XBEE" position="absolute" height="30px" width="30px"/>
-	<img src="images/Room.png" margin-top="30px" position="relative" width="1000" height="700" alt="" /></div>
+    <img id="bottom2" class="point" src="images/Xbeer.jpeg" alt="XBEE" position="absolute" height="30px" width="30px"/>
+	
 	<div id="welcome" class="container">
     	
 <div class="title">
