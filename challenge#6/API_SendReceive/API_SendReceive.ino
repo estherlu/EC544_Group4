@@ -24,8 +24,14 @@ AtCommandResponse atResponse = AtCommandResponse();
 #define ssRX 2
 #define ssTX 3
 SoftwareSerial nss(ssRX, ssTX);
-
 SoftwareSerial xbeeSerial(2,3);
+
+
+uint8_t id = '1';
+int id_list[4];
+unsigned long id_time[4];
+int leaderID = 0;
+boolean leader = false;
 
 void setup() {  
   // start serial
@@ -56,12 +62,45 @@ void loop()
      for (int i= 0; i < rx.getDataLength(); i++){
         if (rx.getData()[i] == 'X' && rx.getData()[i+1] == 'X')
         {   
-           for (int j= i; j < i+4; j++)   
+           for (int j= i; j < i+3; j++)   
            {
-                Serial.write(rx.getData()[j]);
+              uint8_t data = rx.getData()[j];
+              if (data == '1')
+              {
+                id_list[0] = 1;
+                id_time[0] = millis();
+                //Serial.write(rx.getData()[j]);
+                Serial.println("XXXXXXXX  1 XXXXXXXXX");
+                Serial.write(id_list[0]);
+                Serial.write(id_time[0]);
+              }
+              else if (data == '2')
+              {
+                id_list[1] = 2;
+                id_time[1] = millis();
+                //Serial.write(rx.getData()[j]);
+                Serial.println("XXXXXXXX  2 XXXXXXXXX");
+                Serial.print(id_list[1]);
+                Serial.print(id_time[1]);
+              }
+              else if (data == '3')
+              {
+                id_list[2] = 3;
+                id_time[2] = millis();
+                Serial.println("XXXXXXXX  3 XXXXXXXXX");
+                Serial.print(id_list[2]);
+                Serial.print(id_time[2]);
+              }
+              else if (data == '4')
+              {
+                id_list[3] = 4;
+                id_time[3] = millis();
+                Serial.println("XXXXXXXX  4 XXXXXXXXX");
+                Serial.print(id_list[3]);
+                Serial.print(id_time[3]);
+              }
            }
            break;
-            Serial.write(' ');
         }
       }
       Serial.println();
