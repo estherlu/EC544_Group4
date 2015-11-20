@@ -38,7 +38,7 @@ void setup() {
 void loop() 
 {
       /*Send Message*/
-      uint8_t payload[] = {'X', 'X', '1', '1'};
+      uint8_t payload[] = {'X', 'X', '4', '4'};
       // Specify the address of the remote XBee (this is the SH + SL)
       XBeeAddress64 addr64 = XBeeAddress64(0x00000000, 0x0000FFFF);
       // Create a TX Request
@@ -47,7 +47,7 @@ void loop()
       xbee.send(zbTx);
 
       
-      delay(1000);
+      delay(300);
 
       /*Receive Data*/
       xbee.getResponse().getZBRxResponse(rx);
@@ -66,5 +66,5 @@ void loop()
       }
       Serial.println();
  
-    delay(1000);
+    delay(300);
 }
