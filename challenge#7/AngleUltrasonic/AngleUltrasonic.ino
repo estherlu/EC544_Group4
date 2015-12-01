@@ -31,19 +31,20 @@ double setPt, Input, Output;
 int Kp = 1.8;     // initial 2
 int Ki = 0.05;  // initial 0.05
 int Kd = 0.5;   // initial 0.5
-
+float angle;
 int HMC6352SlaveAddress = 0x42;
 int HMC6352ReadAddress = 0x41; //"A" in hex, A command is: 
 int headingValue;
 
 //int inchesLast_1 = 0;
 //int inchesLast_2 = 0;
-
+long distanceCm1,distanceCm2,distanceCmLast1,distanceCmLast2,distanceCmLast11,distanceCmLast22;
+  
 PID PIDleft(&Input, &Output, &setPt, Kp, Ki, Kd, DIRECT);
 const int TRIG_PIN1 = 4;
 const int ECHO_PIN1 = 5;
-const int TRIG_PIN2 = 4;
-const int ECHO_PIN2 = 5;
+const int TRIG_PIN2 = 12;
+const int ECHO_PIN2 = 13;
 float headingSum;
 float headingInt; 
 //float headingIntObj;
@@ -52,6 +53,30 @@ float headingInt;
 /*void repeatMe() {
      wheels.write(110);
 }*/
+
+long CalculateUltrasonic1(){
+  digitalWrite(TRIG_PIN1, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG_PIN1, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG_PIN1, LOW);
+  long duration1 = pulseIn(ECHO_PIN1,HIGH);
+ 
+  // convert the time into a distance
+  return duration1 / 29.1 / 2 ;
+}
+
+long CalculateUltrasonic2(){
+  digitalWrite(TRIG_PIN2, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TRIG_PIN2, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TRIG_PIN2, LOW);
+  long duration2 = pulseIn(ECHO_PIN2,HIGH);
+ 
+  // convert the time into a distance
+  return duration2 / 29.1 / 2 ;
+}
 void setup() {
   Serial.begin(9600); //Opens serial connection at 9600bps.
   XBee.begin(9600);
@@ -83,7 +108,7 @@ void setup() {
   duration = pulseIn(ECHO_PIN1,HIGH);
  
   // convert the time into a distance
-  Firstdist = duration1 / 29.1 / 2 ;
+  Firstdist = duration / 29.1 / 2 ;
          
      
   setPt = Firstdist;
@@ -110,8 +135,7 @@ void calibrateESC(){
 
 void loop() {
   //int sensor_1, inches_1 /*sensor_2, inches_2, x*/;
-  long duration1,duration2, distanceCm1,distanceCm2,distanceCmLast1,distanceCmLast2;
-  
+;
 
   if (XBee.available())
   {
@@ -133,17 +157,11 @@ void loop() {
        Serial.println("Stop");
      }
   }
- //Ultrasonic sensor 1 
-  // Give a short LOW pulse beforehand to ensure a clean HIGH pulse:
-  digitalWrite(TRIG_PIN1, LOW);
-  delayMicroseconds(2);
-  digitalWrite(TRIG_PIN1, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIG_PIN1, LOW);
-  duration1 = pulseIn(ECHO_PIN1,HIGH);
- 
+ //Ultrasonic sensor 1
   // convert the time into a distance
-  distanceCm1 = duration1 / 29.1 / 2 ;
+  distanceCmLast11=distanceCmLast1;
+  distanceCmLast1=distanceCm1;
+  distanceCm1 = CalculateUltrasonic1() ;
   if (distanceCm1 <= 0){
     Serial.println("Out of range");
   }
@@ -153,16 +171,10 @@ void loop() {
     Serial.println();
   }
  //Ultrasonic sensor 2 
-  // Give a short LOW pulse beforehand to ensure a clean HIGH pulse:
-  digitalWrite(TRIG_PIN2, LOW);
-  delayMicroseconds(2);
-  digitalWrite(TRIG_PIN2, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIG_PIN2, LOW);
-  duration2 = pulseIn(ECHO_PIN2,HIGH);
- 
   // convert the time into a distance
-  distanceCm2 = duration2 / 29.1 / 2 ;
+  distanceCmLast22=distanceCmLast2;
+  distanceCmLast2=distanceCm2;
+  distanceCm2 = CalculateUltrasonic2();
   if (distanceCm2 <= 0){
     Serial.println("Out of range");
   }
@@ -203,110 +215,38 @@ void loop() {
     
   if (cmnd == 49 or cmnd == 50)
   {
-    if (dist <= 80) 
-    { esc.write(90);
+    if (dist <= 40) 
+    { 
+      esc.write(90);
     }
     else esc.write(77);
-    
-    //inchesLast_2 = inches_2;
-    
-    //print out the decimal result
-    //Serial.print("EZ1: ");
-    //Serial.println(inches_1,DEC);
-    //Serial.println(inches_2,DEC);
-  
-  
-  //PID Computation
+   
+    //PID Computation
     if(cmnd==49) {
       Input = distanceCm1;
-    
       // use PID loop
       PIDleft.Compute();
       wheels.write(110 + Output);
     }
-
-
-      
       //Angle Calculation
-      angle=acos((distanceCm2-distanceCm1)/20);
-
+    angle=acos((distanceCm2-distanceCm1)/30);
       //turning phase
-           
-
-        
-    
    
-    if (distanceCm1 > 500 && dist < 180 && cmnd=49 ) {
-
-      cmnd=50
-      
-     }
-     
-      //headingIntObj = headingInt +90;
-     if (cmnd==50 && ((distanceCm1-distanceCm2)>5))
-     {
-      wheels.write(50); //Turn right
-        esc.write(87);
-        Serial.println("Turn RIGHT **");
-        }
-     else{
-     cmnd=49; 
-     }
-     //if(headingIntObj+90>=360){headingIntObj1=headingIntObj+140-360;}
-     
-      //while((headingInt>=headingIntObj)||(headingInt<=headingIntObj1)){
-      //if(headingInt<=20 || headingInt>=40){
-        wheels.write(50); //Turn right
-        esc.write(87);
-      
+    if ((distanceCm1 > 120) && (dist < 300) && (cmnd==49) ) {
+      cmnd=50; 
+      wheels.write(40); //Turn right
+      esc.write(85);
       Serial.println("Turn RIGHT **");
-      //Serial.println(headingInt);
-      //digitalWrite(7, HIGH);
-        //}
-     // Serial.println("This is the turning phase 00000***********************");
-     // timer.run();
-       //delay(6000);
-       //setPt=dist;
-       cmnd = 50; // Turning phase
     }
-    
-
-     if(cmnd == 50) {
-      //wheels.write(60); //Turn right
-      //esc.write(87);
-      //Serial.println("Turn RIGHT **");
-      if (headingInt >= 10 && headingInt <= 20) {
-        cmnd = 49;
-       Serial.println("EXIT THE TURN phase ########");
-       setPt = dist;
-       wheels.write(110);
-      }
-      //if ( (dist <200 )) {
-       
-    }*/
- }
- /* this is the code for the compass
- //"Get Data. Compensate and Calculate New Heading"
-  Wire.beginTransmission(HMC6352SlaveAddress);
-  Wire.write(HMC6352ReadAddress);              // The "Get Data" command
-  Wire.endTransmission();
-
-  //time delays required by HMC6352 upon receipt of the command
-  //Get Data. Compensate and Calculate New Heading : 6ms
-  delay(6);
-
-  Wire.requestFrom(HMC6352SlaveAddress, 2); //get the two data bytes, MSB and LSB
-
-  //"The heading output data will be the value in tenths of degrees
-  //from zero to 3599 and provided in binary format over the two bytes."
-  byte MSB = Wire.read();
-  byte LSB = Wire.read();
-
-  headingSum = (MSB << 8) + LSB; //(MSB / LSB sum)
-  headingInt = headingSum / 10; 
-
-  Serial.print(headingInt);
-  Serial.println(" degrees");
-  delay(1000);
-  */
+      //headingIntObj = headingInt +90;
+    if (cmnd==50 && ((distanceCm2-distanceCm1)>0 || abs(distanceCm2-distanceCm1)<5)&&((distanceCmLast2-distanceCmLast1)>0 || abs(distanceCmLast2-distanceCmLast1)<5)&&((distanceCmLast22-distanceCmLast11)>0 || abs(distanceCmLast22-distanceCmLast11)<5)) {
+      cmnd = 49;
+      wheels.write(110);
+      esc.write(77);
+      setPt = CalculateUltrasonic1();
+      delay(100);
+      Serial.println("Going Straight");
+    }
+   // delay(1000);
+  }
 }
