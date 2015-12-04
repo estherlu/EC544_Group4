@@ -234,7 +234,8 @@ void loop() {
       esc.write(78);
     //PID Computation
     if((cmnd==49)&&(distanceCm1<300)) {
-      Input = (distanceCm1>100)? setPt: distanceCm1;
+      Input = (distanceCm1>100 && distanceCm1 <140)? setPt: distanceCm1;
+      if (distanceCm1 >140) setPt = distanceCm1 - 10;
       // use PID loop
       PIDleft.Compute();
       wheels.write(110 + Output);
@@ -243,7 +244,7 @@ void loop() {
     //angle=acos((distanceCm2-distanceCm1)/30);
       //turning phase
    
-    if ((dist>150 && dist < 235 && distLast >150 && distLast<235) && (cmnd==49)) 
+    if ((dist>150 && dist < 245 && distLast >150 && distLast<245) && (cmnd==49)) 
     {
       cmnd=50; 
       wheels.write(40); //Turn right
