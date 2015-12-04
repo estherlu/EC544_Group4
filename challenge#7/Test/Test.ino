@@ -1,4 +1,13 @@
-
+//4,5,12,13 for Ultra sonic 1 and Ultrasonic 2
+//2 & 3 for xbee
+// 8 , 9 & 10 for driving the car
+/*
+cmnd 48=stop
+cmnd 49=start(PID phase)
+cmnd 50= turn right (TURNING PHASE)
+cmnd 3=turn right
+cmnd 4 = turn left
+*/
 #include <Wire.h>
 #include <Time.h>
 #include <PID_v1.h>
@@ -216,7 +225,29 @@ void loop() {
         esc.write(90);
        Serial.println("Stop");
      }
+     if(cmnd=='3')
+     {
+      
+        Serial.println("Turn Right");
+     }
+     
+     if(cmnd=='4')
+     {
+       
+        Serial.println("Turn Left");
+     }
   }
+   if(cmnd=='3')
+     {
+        wheels.write(40); //Turn right
+       
+     }
+     
+     if(cmnd=='4')
+     {
+        wheels.write(150); //Turn left
+       
+     }
  
  /*Execute Command*/   
   if (cmnd == 49 or cmnd == 50)
