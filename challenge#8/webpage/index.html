@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by TEMPLATED
+http://templated.co
+Released for free under the Creative Commons Attribution License
+
+Name       : Undeviating 
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20140322
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Quicksand:400,700|Questrial" rel="stylesheet" />
+<link href="default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+</script>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+  var socket = io();
+  var location1 = [0,0];
+  var location2 = [0,0]; 
+  var location3 = [0,0];
+
+
+  socket.on('location', function(location){
+  	location3 = location2;
+  	location2 = location1; 
+    location1 = [parseInt(location) / 6 * 25, ((parseInt(location) % 6) - 1) * 28];
+  });
+	var remoteCar = [0,9,0,0];
+	function Forward(){
+			remoteCar[0] = 1;
+			socket.emit('remoteCar', remoteCar.toString().replace(/,/g, ''));
+	}
+	function Stop(){
+			remoteCar[1] = 0;
+			socket.emit('remoteCar', remoteCar.toString().replace(/,/g, ''));
+	}
+	function Right(){
+			remoteCar[2] = 3;
+			socket.emit('remoteCar', remoteCar.toString().replace(/,/g, ''));
+	}
+	function Left(){
+			remoteCar[3] = 4;
+			socket.emit('remoteCar', remoteCar.toString().replace(/,/g, ''));
+	}
+	
+	 var Red = null;
+	 var xbeer = null;
+     var xbeel = null;
+     var xbeeb = null;
+	 var i=1;
+        function init(){
+			Red = document.getElementById('Red');
+			 xbeer = document.getElementById('right');
+			   xbeel = document.getElementById('left');
+			   xbeeb = document.getElementById('bottom');
+			   xbeeb2 = document.getElementById('bottom2');
+               Red.style.position= 'absolute'; 
+               Red.style.left ="210px";
+			   Red.style.top="250px";
+			   xbeer.style.position='absolute';
+			   xbeer.style.left="880px";
+			   xbeer.style.top="800px";
+			   xbeel.style.position='absolute';
+			   xbeel.style.left="180px";
+			   xbeel.style.top="250px";
+			   xbeeb.style.position='absolute';
+			   xbeeb.style.left="180px";
+			   xbeeb.style.top="800px";
+			   xbeeb2.style.position='absolute';
+			   xbeeb2.style.left="880px";
+			   xbeeb2.style.top="250px";
+            }
+			function moveRight(){
+				Red.style.left = 310 + Math.round(location1[0] * 2.95) + 'px';
+				Red.style.top = 459 + Math.round(location1[1] * 2.43) + 'px';
+			}
+            window.onload = init;
+			setInterval(function(){
+			moveRight();
+			   }, 1000);
+
+</script>
+<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+
+</head>
+<body>
+<div id="header-wrapper">
+	<div id="header" class="container">
+		<div id="logo">
+        	<span class="icon icon-cog"></span>
+			<h1><a href="#">EC544 Group4 Challenge 8</a></h1>
+		</div>
+	</div>
+</div>
+<div class="wrapper"> 
+	<img id="room" class="displayed" src="images/PHO4.jpeg" width="800" height="560" alt=""/>
+	<div id="welcome" class="container">
+    	
+<div class="title">
+<button onClick="Forward()" type="button" class="myButton">F</button>
+<button onClick="Stop()" type="button" class="myButtonRed" style="margin-left:20px;">S</button>
+<button onClick="Right()" type="button" class="myButtonPink" style="margin-left:20px;">R</button>
+<button onClick="Left()" type="button" class="myButtonBlue" style="margin-left:20px;">L</button>
+
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>

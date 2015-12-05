@@ -1,0 +1,502 @@
+	html, body
+	{
+		height: 100%;
+	}
+	
+	body
+	{
+		margin: 0px;
+		padding: 0px;
+		background: #2056ac;
+		font-family: 'Questrial', sans-serif;
+		font-size: 12pt;
+		color: rgba(0,0,0,.6);
+	}
+	
+	
+	h1, h2, h3
+	{
+		margin: 0;
+		padding: 0;
+		color: #404040;
+	}
+	
+	p, ol, ul
+	{
+		margin-top: 0;
+	}
+	
+	ol, ul
+	{
+		padding: 0;
+		list-style: none;
+	}
+	
+	p
+	{
+		line-height: 180%;
+	}
+	
+	strong
+	{
+	}
+	
+	a
+	{
+		color: #2056ac;
+	}
+	
+	a:hover
+	{
+		text-decoration: none;
+	}
+	
+
+	.container
+	{
+		margin: 0px auto;
+		width: 100%;
+	}
+	
+
+
+/*********************************************************************************/
+/* Image Style                                                                   */
+/*********************************************************************************/
+
+  img.displayed{
+
+   display: block;
+   position:relative; 
+   margin-left: auto;
+   margin-right: auto
+	
+  }
+  img.point,point2,point3{
+	position: absolute;
+	top: 459px;
+  }
+
+/*********************************************************************************/
+/* List Styles                                                                   */
+/*********************************************************************************/
+
+	ul.style1
+	{
+	}
+
+
+/*********************************************************************************/
+/* Social Icon Styles                                                            */
+/*********************************************************************************/
+
+	ul.contact
+	{
+		margin: 0;
+		padding: 2em 0em 0em 0em;
+		list-style: none;
+	}
+	
+	ul.contact li
+	{
+		display: inline-block;
+		padding: 0em 0.10em;
+		font-size: 1em;
+	}
+	
+	ul.contact li span
+	{
+		display: none;
+		margin: 0;
+		padding: 0;
+	}
+	
+	ul.contact li a
+	{
+		color: #FFF;
+	}
+	
+	ul.contact li a:before
+	{
+		display: inline-block;
+		background: #4C93B9;
+		width: 40px;
+		height: 40px;
+		line-height: 40px;
+		text-align: center;
+		color: rgba(255,255,255,1);
+	}
+	
+
+/*********************************************************************************/
+/* Button Style                                                                  */
+/*********************************************************************************/
+
+	.myButton {
+	background-color:#44c767;
+	-moz-border-radius:42px;
+	-webkit-border-radius:42px;
+	border-radius:42px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.myButton:hover {
+	background-color:#5cbf2a;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+.myButtonRed {
+	background-color:#c74545;
+	-moz-border-radius:42px;
+	-webkit-border-radius:42px;
+	border-radius:42px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.myButtonRed:hover {
+	background-color:#bd2a2a;
+}
+.myButtonRed:active {
+	position:relative;
+	top:1px;
+}
+
+.myButtonPink {
+	background-color:#e09cc5;
+	-moz-border-radius:42px;
+	-webkit-border-radius:42px;
+	border-radius:42px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.myButtonPink:hover {
+	background-color:#d752eb;
+}
+.myButtonPink:active {
+	position:relative;
+	top:1px;
+}
+
+.myButtonBlue {
+	background-color:#96a0e0;
+	-moz-border-radius:42px;
+	-webkit-border-radius:42px;
+	border-radius:42px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.myButtonBlue:hover {
+	background-color:#756ecc;
+}
+.myButtonBlue:active {
+	position:relative;
+	top:1px;
+}
+
+
+
+		
+/*********************************************************************************/
+/* Heading Titles                                                                */
+/*********************************************************************************/
+
+	.title
+	{
+		margin-bottom: 3em;
+		margin-top:2em;
+	}
+	
+	.title h2
+	{
+		font-size: 1.7em;
+	}
+	
+	.title .byline
+	{
+		font-size: 1.1em;
+		color: #6F6F6F#;
+	}
+
+/*********************************************************************************/
+/* Header                                                                        */
+/*********************************************************************************/
+
+	#header-wrapper
+	{
+		overflow: hidden;
+		background: #3e7adb;/*#2056ac;*/
+	}
+
+	#header
+	{
+		text-align: center;
+	}
+
+/*********************************************************************************/
+/* Logo                                                                          */
+/*********************************************************************************/
+
+	#logo
+	{
+		padding: 2em 0em 2em 0em;
+	}
+	
+	#logo h1
+	{
+		display: block;
+		margin-bottom: 0.20em;
+		padding: 0.20em 0.9em;
+		font-size: 3.5em;
+	}
+	
+	#logo a
+	{
+		text-decoration: none;
+		color: #FFF;
+	}
+	
+	#logo span
+	{
+		text-transform: uppercase;
+		font-size: 2.90em;
+		color: rgba(255,255,255,1);
+	}
+
+	#logo span a
+	{
+		color: rgba(255,255,255,0.8);
+	}
+	
+	
+
+/*********************************************************************************/
+/* Menu                                                                          */
+/*********************************************************************************/
+
+	#menu
+	{
+		height: 60px;
+	}
+	
+	#menu ul
+	{
+		display: inline-block;
+		padding: 0em 2em;
+		text-align: center;
+	}
+	
+	#menu li
+	{
+		display: inline-block;
+	}
+	
+	#menu li a, #menu li span
+	{
+		display: inline-block;
+		padding: 0em 1.5em;
+		text-decoration: none;
+		font-size: 0.90em;
+		font-weight: 600;
+		text-transform: uppercase;
+		line-height: 60px;
+		outline: 0;
+		color: #FFF;
+	}
+	
+	#menu li:hover a, #menu li.active a, #menu li.active span
+	{
+		background: #FFF;
+		border-radius: 7px 7px 0px 0px;
+		color: #2056ac;
+	}
+	
+	#menu .current_page_item a
+	{
+	}
+	
+
+/*********************************************************************************/
+/* Banner                                                                        */
+/*********************************************************************************/
+
+	#banner
+	{
+		padding-top: 5em;
+	}
+
+/*********************************************************************************/
+/* Wrapper                                                                       */
+/*********************************************************************************/
+
+
+	.wrapper
+	{
+		overflow: hidden;
+		padding: 3em 0em 3em 0em;
+		background: #FFF;
+	}
+
+	#wrapper1
+	{
+		background: #FFF;
+	}
+
+	#wrapper2
+	{
+		overflow: hidden;
+		background: #F3F3F3;
+		padding: 5em 0em;
+		text-align: center;
+	}
+
+	#wrapper3
+	{
+	}
+	
+	#wrapper4
+	{
+	}
+
+/*********************************************************************************/
+/* Welcome                                                                       */
+/*********************************************************************************/
+
+	#welcome
+	{
+		overflow: hidden;
+		width: 1000px;
+		padding: 1em 100px 0em 100px;
+		text-align: center;
+	}
+
+	#welcome h1
+	{
+		padding: 1em 100px 0em 100px;
+		text-align: center;
+		font-size: 
+	}
+	
+	#welcome .content
+	{
+		padding: 0em 8em;
+	}
+	
+	#welcome .title h2
+	{
+	}
+	
+	#welcome a,
+	#welcome strong
+	{
+	}
+
+/*********************************************************************************/
+/* Page                                                                          */
+/*********************************************************************************/
+
+	#page-wrapper
+	{
+		overflow: hidden;
+		background: #2F1E28;
+		padding: 3em 0em 6em 0em;
+		text-align: center;
+	}
+
+	#page
+	{
+	}
+
+/*********************************************************************************/
+/* Content                                                                       */
+/*********************************************************************************/
+
+	#content
+	{
+		float: left;
+		width: 700px;
+		padding-right: 100px;
+		border-right: 1px solid rgba(0,0,0,.1);
+	}
+
+/*********************************************************************************/
+/* Sidebar                                                                       */
+/*********************************************************************************/
+
+	#sidebar
+	{
+		float: right;
+		width: 350px;
+	}
+
+/*********************************************************************************/
+/* Footer                                                                        */
+/*********************************************************************************/
+
+	#footer
+	{
+		overflow: hidden;
+		padding: 2em 0em 5em 0em;
+		background: #E3F0F7;
+		text-align: center;
+
+	}
+
+	#footer h1
+	{
+		display: block;
+		margin-bottom: 0.20em;
+		padding: 0.20em 0.9em;
+		font-size: 1.5em;
+	}
+
+
+		
+	#footer .fbox1,
+	#footer .fbox2,
+	#footer .fbox3
+	{
+		float: left;
+		width: 320px;
+		padding: 0px 40px 0px 40px;
+	}
+	
+	#footer .icon
+	{
+		display: block;
+		margin-bottom: 1em;
+		font-size: 3em;
+	}
+
+	
+	#footer .title span
+	{
+		color: rgba(255,255,255,0.4);
+	}
+	
+
