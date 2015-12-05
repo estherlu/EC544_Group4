@@ -109,11 +109,17 @@ Released   : 20140322
 	<div id="welcome" class="container">
     	
 <div class="title">
-<button onClick="Forward()" type="button" class="myButton">F</button>
-<button onClick="Stop()" type="button" class="myButtonRed" style="margin-left:20px;">S</button>
-<button onClick="Right()" type="button" class="myButtonPink" style="margin-left:20px;">R</button>
-<button onClick="Left()" type="button" class="myButtonBlue" style="margin-left:20px;">L</button>
-
+<button onClick="Forward()" type="button" class="myButton" style="margin-bottom:20px;">F</button>
+<p><button onClick="Right()" type="button" class="myButtonPink" style="margin-right:0px;">R</button>
+<button type="button" class="myButtonRed">S</button>
+<button onClick="Left()" type="button" class="myButtonBlue" style="margin-right:5px;">L</button>
+</p>
+<button onClick="Stop()" type="button" class="myButton">B</button>
+<label class="switch" style="margin-left:445px; margin-top:20px;">
+	<input class="switch-input" type="checkbox" />
+	<span class="switch-label" data-on="On" data-off="Off"></span> 
+	<span class="switch-handle"></span> 
+</label>
 		</div>
 	</div>
 </div>
