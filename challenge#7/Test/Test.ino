@@ -5,6 +5,7 @@
 cmnd 48=stop
 cmnd 49=start(PID phase)
 cmnd 50= turn right (TURNING PHASE)
+cmnd 2=run forward
 cmnd 3=turn right
 cmnd 4 = turn left
 */
@@ -237,6 +238,11 @@ void loop() {
         Serial.println("Turn Left");
      }
   }
+   if(cmnd=='2')
+     {
+        esc.write(75);
+       
+     } 
    if(cmnd=='3')
      {
         wheels.write(40); //Turn right
