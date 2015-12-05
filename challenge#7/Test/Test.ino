@@ -226,27 +226,36 @@ void loop() {
         esc.write(90);
        Serial.println("Stop");
      }
-     if(cmnd=='3')
+     if(cmnd=='8')
      {
-      
+        Serial.println("Run forward") ;
+       
+     } 
+     if(cmnd=='2')
+     {
+        Serial.println("Run backwards") ;       
+     } 
+     if(cmnd=='6')
+     {      
         Serial.println("Turn Right");
      }
      
      if(cmnd=='4')
-     {
-       
+     {      
         Serial.println("Turn Left");
      }
   }
-   if(cmnd=='2')
+   if(cmnd=='8')
      {
-        esc.write(75);
-       
+        esc.write(75);//run forward       
      } 
-   if(cmnd=='3')
+     if(cmnd=='2')
+     {         
+        esc.write(95);//run backwards
+     } 
+   if(cmnd=='6')
      {
-        wheels.write(40); //Turn right
-       
+        wheels.write(40); //Turn right      
      }
      
      if(cmnd=='4')
