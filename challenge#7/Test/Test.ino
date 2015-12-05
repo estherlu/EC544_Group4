@@ -5,9 +5,10 @@
 cmnd 48=stop
 cmnd 49=start(PID phase)
 cmnd 50= turn right (TURNING PHASE)
-cmnd 2=run forward
-cmnd 3=turn right
-cmnd 4 = turn left
+cmnd w=run forward
+cmnd s=run backward
+cmnd d=turn right
+cmnd a = turn left
 */
 #include <Wire.h>
 #include <Time.h>
@@ -226,39 +227,39 @@ void loop() {
         esc.write(90);
        Serial.println("Stop");
      }
-     if(cmnd=='8')
+     if(cmnd=='w')
      {
         Serial.println("Run forward") ;
        
      } 
-     if(cmnd=='2')
+     if(cmnd=='s')
      {
         Serial.println("Run backwards") ;       
      } 
-     if(cmnd=='6')
+     if(cmnd=='d')
      {      
         Serial.println("Turn Right");
      }
      
-     if(cmnd=='4')
+     if(cmnd=='a')
      {      
         Serial.println("Turn Left");
      }
   }
-   if(cmnd=='8')
+   if(cmnd=='w')
      {
         esc.write(75);//run forward       
      } 
-     if(cmnd=='2')
+     if(cmnd=='s')
      {         
         esc.write(95);//run backwards
      } 
-   if(cmnd=='6')
+   if(cmnd=='d')
      {
         wheels.write(40); //Turn right      
      }
      
-     if(cmnd=='4')
+     if(cmnd=='a')
      {
         wheels.write(150); //Turn left
        
