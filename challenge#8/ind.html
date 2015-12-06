@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+
+<button onclick="forward()">F</button>
+<p><button onclick="left()">L</button>
+<button onclick="stop()">S</button>
+<button onclick="right()">R</button></p>
+<button onclick="back()">B</button>
+
+
+<p><button onclick="onoff()">on/off</button></p>
+
+<p id="demo"></p>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	var socket = io();
+</script>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+var remoteCar;
+
+var flag = false;
+
+function forward(){
+	if(flag){
+		//alert("F");
+		remoteCar = 2;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}
+
+function back(){
+	//alert("B");
+	if(flag){
+		//alert("F");
+		remoteCar = 3;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}
+
+function left(){
+	//alert("L");
+	if(flag){
+		//alert("F");
+		remoteCar = 4;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}
+
+function right(){
+	//alert("R");
+	if(flag){
+		//alert("F");
+		remoteCar = 5;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}
+
+function stop(){
+	//alert("S");
+	if(flag){
+		//alert("F");
+		remoteCar = 6;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}
+
+
+
+
+function onoff(){
+	flag = !flag;
+	//alert(flag.toString());
+	if(flag){
+		remoteCar = 1;
+		socket.emit('remoteCar', remoteCar.toString());
+	}else{
+		remoteCar = 0;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}
+</script>
+
+</body>
+</html>
