@@ -26,7 +26,6 @@ Released   : 20140322
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 <script>
-  var socket = io();
   var location1 = [0,0];
   var location2 = [0,0]; 
   var location3 = [0,0];
@@ -37,22 +36,32 @@ Released   : 20140322
   	location2 = location1; 
     location1 = [parseInt(location) / 6 * 25, ((parseInt(location) % 6) - 1) * 28];
   });
-	var remoteCar = [0,9,0,0];
+	var remoteCar;
+	var check = null;
+	check = document.getElementById('checkbox');
+function Switch(check){
+		if(check.checked = !check.checked)
+{
 	function Forward(){
-			remoteCar[0] = 1;
+			remoteCar = 2;
 			socket.emit('remoteCar', remoteCar.toString().replace(/,/g, ''));
 	}
 	function Stop(){
-			remoteCar[1] = 0;
+			remoteCar = 6;
 			socket.emit('remoteCar', remoteCar.toString().replace(/,/g, ''));
 	}
 	function Right(){
-			remoteCar[2] = 3;
+			remoteCar = 5;
 			socket.emit('remoteCar', remoteCar.toString().replace(/,/g, ''));
 	}
 	function Left(){
-			remoteCar[3] = 4;
+			remoteCar = 4;
 			socket.emit('remoteCar', remoteCar.toString().replace(/,/g, ''));
+    function Back(){
+			remoteCar = 3;
+			socket.emit('remoteCar', remoteCar.toString().replace(/,/g, ''));
+	}
+	}
 	}
 	
 	 var Red = null;
@@ -115,7 +124,7 @@ Released   : 20140322
 	<div id="welcome" class="container">
 <div class="title">
 <label class="switch" style="margin-left:445px; margin-top:20px;">
-	<input class="switch-input" type="checkbox" />
+	<input id="checkbox" class="switch-input" type="checkbox" onchange="Switch(this)"/>
 	<span class="switch-label" data-on="On" data-off="Off"></span> 
 	<span class="switch-handle"></span> 
 </label>
