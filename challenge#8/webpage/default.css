@@ -67,10 +67,10 @@
 
   img.displayed{
 
-   display: block;
+   display:block;
    position:relative; 
    margin-left: auto;
-   margin-right: auto
+   margin-right: auto;
 	
   }
   img.point,point2,point3{
@@ -446,6 +446,8 @@
 		overflow: hidden;
 		padding: 3em 0em 3em 0em;
 		background: #FFF;
+		display:block;
+		position:relative;
 	}
 
 	#wrapper1
