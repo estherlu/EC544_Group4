@@ -11,7 +11,7 @@ portConfig = {
 };
 
 var sp;
-var CARStatus = "0";
+var CARStatus = '0';
 
 sp = new SerialPort.SerialPort(portName, portConfig);
 
