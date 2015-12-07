@@ -13,7 +13,7 @@ Released   : 20140322
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
+<title>Challenge 8</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Quicksand:400,700|Questrial" rel="stylesheet" />
@@ -31,40 +31,65 @@ Released   : 20140322
   var location3 = [0,0];
 
 
-  socket.on('location', function(location){
+  /*socket.on('location', function(location){
   	location3 = location2;
   	location2 = location1; 
     location1 = [parseInt(location) / 6 * 25, ((parseInt(location) % 6) - 1) * 28];
-  });
+  });*/
 	var remoteCar;
-	var check = null;
-	check = document.getElementById('checkbox');
-function Switch(check){
-		if(check.checked = !check.checked)
-{
-	function Forward(){
-			remoteCar = 2;
-			socket.emit('remoteCar', remoteCar.toString().replace(/,/g, ''));
+var flag = false;
+function forward(){
+	if(flag){
+		alert("F");
+		remoteCar = 2;
+		socket.emit('remoteCar', remoteCar.toString());
 	}
-	function Stop(){
-			remoteCar = 6;
-			socket.emit('remoteCar', remoteCar.toString().replace(/,/g, ''));
+}
+function back(){
+	//alert("B");
+	if(flag){
+		//alert("F");
+		remoteCar = 3;
+		socket.emit('remoteCar', remoteCar.toString());
 	}
-	function Right(){
-			remoteCar = 5;
-			socket.emit('remoteCar', remoteCar.toString().replace(/,/g, ''));
+}
+function left(){
+	//alert("L");
+	if(flag){
+		//alert("F");
+		remoteCar = 4;
+		socket.emit('remoteCar', remoteCar.toString());
 	}
-	function Left(){
-			remoteCar = 4;
-			socket.emit('remoteCar', remoteCar.toString().replace(/,/g, ''));
-    function Back(){
-			remoteCar = 3;
-			socket.emit('remoteCar', remoteCar.toString().replace(/,/g, ''));
+}
+function right(){
+	//alert("R");
+	if(flag){
+		//alert("F");
+		remoteCar = 5;
+		socket.emit('remoteCar', remoteCar.toString());
 	}
+}
+function stop(){
+	//alert("S");
+	if(flag){
+		//alert("F");
+		remoteCar = 6;
+		socket.emit('remoteCar', remoteCar.toString());
 	}
+}
+function onoff(){
+	flag = !flag;
+	//alert(flag.toString());
+	if(flag){
+		remoteCar = 1;
+		socket.emit('remoteCar', remoteCar.toString());
+	}else{
+		remoteCar = 0;
+		socket.emit('remoteCar', remoteCar.toString());
 	}
+}
 	
-	 var Red = null;
+/*	 var Red = null;
 	 var xbeer = null;
      var xbeel = null;
      var xbeeb = null;
@@ -98,7 +123,7 @@ function Switch(check){
             window.onload = init;
 			setInterval(function(){
 			moveRight();
-			   }, 1000);
+			   }, 1000);*/
 
 </script>
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
@@ -115,16 +140,16 @@ function Switch(check){
 </div>
 <div class="wrapper">
   <img id="room" class="displayed" src="images/4floor.jpg" width="1064" height="400" alt=""/>
-    <button onClick="Forward()" type="button" class="myButton" style="position: absolute; top: 136px; left: 315px;">F</button>
-<p><button onClick="Right()" type="button" class="myButtonPink" style="position: absolute; top: 210px; left: 398px;">R</button>
-<button type="button" class="myButtonRed" style="position: absolute; top: 210px; left: 314px;">S</button>
-<button onClick="Left()" type="button" class="myButtonBlue" style="position: absolute; top: 210px; left: 232px;">L</button>
+    <button onClick="forward()" class="myButton" style="position: absolute; top: 136px; left: 315px;">F</button>
+<p><button onClick="right()" class="myButtonPink" style="position: absolute; top: 210px; left: 398px;">R</button>
+<button onClick="stop()" class="myButtonRed" style="position: absolute; top: 210px; left: 314px;">S</button>
+<button onClick="left()" class="myButtonBlue" style="position: absolute; top: 210px; left: 232px;">L</button>
 </p>
-<button onClick="Stop()" type="button" class="myButton" style="position: absolute; top: 285px; left: 314px;">B</button>
-	<div id="welcome" class="container">
+<button onClick="back()" class="myButton" style="position: absolute; top: 285px; left: 314px;">B</button>
+<div id="welcome" class="container">
 <div class="title">
 <label class="switch" style="margin-left:445px; margin-top:20px;">
-	<input id="checkbox" class="switch-input" type="checkbox" onchange="Switch(this)"/>
+	<input id="checkbox" class="switch-input" type="checkbox" onchange="onoff()"/>
 	<span class="switch-label" data-on="On" data-off="Off"></span> 
 	<span class="switch-handle"></span> 
 </label>
