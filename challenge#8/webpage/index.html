@@ -31,14 +31,43 @@ Released   : 20140322
   var location3 = [0,0];
 
 
-  /*socket.on('location', function(location){
-  	location3 = location2;
-  	location2 = location1; 
-    location1 = [parseInt(location) / 6 * 25, ((parseInt(location) % 6) - 1) * 28];
-  });*/
+  socket.on('location', function(location){
+    location1 = parseInt(location) / 6 * 25;
+  });
 	var remoteCar;
 var flag = false;
-function forward(){
+
+	 var Red = null;
+	 var xbeer = null;
+     var xbeel = null;
+     var xbeeb = null;
+	 var i=1;
+        function init(){
+			Red = document.getElementById('Red');
+			 /*xbeer = document.getElementById('right');
+			   xbeel = document.getElementById('left');
+			   xbeeb = document.getElementById('bottom');
+			   xbeeb2 = document.getElementById('bottom2');
+               Red.style.position= 'absolute'; 
+               Red.style.left ="210px";
+			   Red.style.top="250px";
+			   xbeer.style.position='absolute';
+			   xbeer.style.left="1100px";
+			   xbeer.style.top="220px";
+			   xbeel.style.position='absolute';
+			   xbeel.style.left="52px";
+			   xbeel.style.top="220px";
+			   xbeeb.style.position='absolute';
+			   xbeeb.style.left="52px";
+			   xbeeb.style.top="620px";
+			   xbeeb2.style.position='absolute';
+			   xbeeb2.style.left="1100px";
+			   xbeeb2.style.top="620px";*/
+			   Red.style.position= 'absolute'; 
+               Red.style.left ="52px";
+			   Red.style.top="220px";
+
+			   function forward(){
 	if(flag){
 		alert("F");
 		remoteCar = 2;
@@ -89,41 +118,34 @@ function onoff(){
 	}
 }
 	
-/*	 var Red = null;
-	 var xbeer = null;
-     var xbeel = null;
-     var xbeeb = null;
-	 var i=1;
-        function init(){
-			Red = document.getElementById('Red');
-			 xbeer = document.getElementById('right');
-			   xbeel = document.getElementById('left');
-			   xbeeb = document.getElementById('bottom');
-			   xbeeb2 = document.getElementById('bottom2');
-               Red.style.position= 'absolute'; 
-               Red.style.left ="210px";
-			   Red.style.top="250px";
-			   xbeer.style.position='absolute';
-			   xbeer.style.left="880px";
-			   xbeer.style.top="800px";
-			   xbeel.style.position='absolute';
-			   xbeel.style.left="180px";
-			   xbeel.style.top="250px";
-			   xbeeb.style.position='absolute';
-			   xbeeb.style.left="180px";
-			   xbeeb.style.top="800px";
-			   xbeeb2.style.position='absolute';
-			   xbeeb2.style.left="880px";
-			   xbeeb2.style.top="250px";
             }
+var index = location1;
 			function moveRight(){
-				Red.style.left = 310 + Math.round(location1[0] * 2.95) + 'px';
-				Red.style.top = 459 + Math.round(location1[1] * 2.43) + 'px';
+				for(index=1; index<=16; index++)
+				{
+				if(index<=7&&i>=1)
+				{
+				Red.style.left = 52 + index* 150 + 'px';
+				}
+				else if(index>=9&&index<=15)
+				{
+				  Red.style.left = 52 + (16-index) * 150 + 'px';
+				}
+				else if(index == 8)
+				{
+				  Red.style.top = 420 + 'px';
+				  Red.style.left = 1100 + 'px';
+				}
+				else{
+					Red.style.top = 420 + 'px';
+					Red.style.left = 52 + 'px';
+				}
 			}
+		}
             window.onload = init;
 			setInterval(function(){
 			moveRight();
-			   }, 1000);*/
+			   }, 1000);
 
 </script>
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
@@ -140,6 +162,7 @@ function onoff(){
 </div>
 <div class="wrapper">
   <img id="room" class="displayed" src="images/4floor.jpg" width="1064" height="400" alt=""/>
+  <img id="Red" class="point" src="images/Red.png" alt="CAR" position="absolute" height="30px" width="30px"/>
     <button onClick="forward()" class="myButton" style="position: absolute; top: 136px; left: 315px;">F</button>
 <p><button onClick="right()" class="myButtonPink" style="position: absolute; top: 210px; left: 398px;">R</button>
 <button onClick="stop()" class="myButtonRed" style="position: absolute; top: 210px; left: 314px;">S</button>
