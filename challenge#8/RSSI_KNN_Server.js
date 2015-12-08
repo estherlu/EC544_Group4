@@ -23,23 +23,8 @@ app.use('/', express.static(__dirname + '/webpage'));
 
 
 app.get('/localization', function(req, res){
-  res.sendfile('index.html');
+  res.sendfile('webpage/index.html');
 });
-
-// app.get('/', function(req, res){
-//    res.sendfile('index.html');
-//  });
-
-// app.use('/default', express.static(__dirname + '/default'));
-// app.use('/font', express.static(__dirname + '/font'));
-
-// app.get('/default.css',function(req, res){
-//   res.sendfile('default.css');
-// });
-
-// app.get('/font.css',function(req, res){
-//   res.sendfile('font.css');
-// });
 
 var knn = new KNN();
 
@@ -138,15 +123,13 @@ io.on('connection', function(socket){
   });
 });
 
-http.listen(4000, function(){
+http.listen(4001, function(){
   //listen on localhost port 4000
-  console.log('listening on *:4000');
+  console.log('listening on *:4001');
 });
-
 
 var sp;
 sp = new SerialPort.SerialPort(portName, portConfig);
-
 
 //Create a packet to be sent to all other XBEE units on the PAN.
 // The value of 'data' is meaningless, for now.
@@ -193,7 +176,8 @@ XBeeAPI.on("frame_object", function(frame) {
     }
 
     var ans = knn.predict(dataset);
-    io.emit('location', 4);
+    io.emit('location', ans);
+    console.log("reach here");
     console.log("answer: " + ans);
   }
 });
