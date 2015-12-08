@@ -21,7 +21,7 @@ Released   : 20140322
 <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
 <script src="/socket.io/socket.io.js"></script>
 <script>
-  var socket = io();
+    var socket = io();
 </script>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
@@ -29,13 +29,17 @@ Released   : 20140322
   //var location1 = [0,0];
   //var location2 = [0,0]; 
   //var location3 = [0,0];
-  var location1 =5;
+  var partition;
+
+  socket.on('location', function(location){ 
+    partition = parseInt(location);
+  });
 
   /*socket.on('location', function(location){
     //var location1 = 5;//parseInt(location) / 6 * 25;
   });*/
 	var remoteCar;
-var flag = false;
+	var flag = false;
 
 	 var Red = null;
 	 var xbeer = null;
@@ -126,8 +130,8 @@ function onoff(){
             
 }
 			
-			function moveRight(){
-				var index = 13;
+			function moveRight(partition){
+				var index = partition;
 				// if(index == 1)
 				// {
 				// Red.style.left = 80  + 'px';
@@ -158,7 +162,7 @@ function onoff(){
 			//alert("before");
 			setInterval(function(){
 			//alert("after");	
-			moveRight();
+			moveRight(partition);
 			   }, 1000);
 
 </script>
@@ -178,12 +182,12 @@ function onoff(){
   <img id="room" class="displayed" src="images/4floor.jpg" width="1064" height="400" alt=""/>
   <img id="Red" class="point" src="images/Red.png" alt="CAR" position="absolute" height="30px" width="30px"/>
 
-    <button onClick="forward()" class="myButton" style="position: absolute; top: 136px; left: 315px;">F</button>
-<p><button onClick="right()" class="myButtonPink" style="position: absolute; top: 210px; left: 398px;">R</button>
-<button onClick="stop()" class="myButtonRed" style="position: absolute; top: 210px; left: 314px;">S</button>
-<button onClick="left()" class="myButtonBlue" style="position: absolute; top: 210px; left: 232px;">L</button>
+    <button onClick="forward()" class="myButton" style="position: absolute; top: 136px; left: 230px;">F</button>
+<p><button onClick="right()" class="myButtonPink" style="position: absolute; top: 210px; left: 318px;">R</button>
+<button onClick="stop()" class="myButtonRed" style="position: absolute; top: 210px; left: 230px;">S</button>
+<button onClick="left()" class="myButtonBlue" style="position: absolute; top: 210px; left: 147px;">L</button>
 </p>
-<button onClick="back()" class="myButton" style="position: absolute; top: 285px; left: 314px;">B</button>
+<button onClick="back()" class="myButton" style="position: absolute; top: 285px; left: 230px;">B</button>
 <div id="welcome" class="container">
 <div class="title">
 <label class="switch" style="margin-left:445px; margin-top:20px;">
