@@ -23,7 +23,7 @@ app.use('/', express.static(__dirname + '/webpage'));
 
 
 app.get('/localization', function(req, res){
-  res.sendfile('webpage/index.html');
+  res.sendfile('index.html');
 });
 
 var knn = new KNN();
