@@ -68,11 +68,11 @@ var flag = false;
                
 			   //Red.style.position= 'absolute'; 
 			   //alert("2");
-               Red.style.left ="150px";
-			   Red.style.top="70px";
+               Red.style.left ="1050px";
+			   Red.style.top="240px";
 
 			   /*function forward(){
-	if(flag){
+
 		alert("F");
 		remoteCar = 2;
 		socket.emit('remoteCar', remoteCar.toString());
@@ -127,26 +127,31 @@ function onoff(){
 }
 			
 			function moveRight(){
-				var index = 2;
+				var index = 13;
+				// if(index == 1)
+				// {
+				// Red.style.left = 80  + 'px';
+				// Red.style.top = 40 + 'px';
+				// }
 				if(index<=7&&index>=1)
 				{
-				Red.style.left = 52 + index* 150 + 'px';
-				Red.style.top = 220 + 'px';
+					Red.style.left = -80 + Math.round(index* 160) + 'px';
+					Red.style.top = 70 + 'px';
 				//alert("1");
 				}
 				else if(index>=9&&index<=15)
 				{
-				  Red.style.left = 52 + (16-index) * 150 + 'px';
-				  Red.style.top = 620 + 'px';
+				  Red.style.left = -80 + (16-index) * 160 + 'px';
+				  Red.style.top = 400 + 'px';
 				}
 				else if(index == 8)
 				{
-				  Red.style.top = 420 + 'px';
-				  Red.style.left = 1100 + 'px';
+				  Red.style.top = 235 + 'px';
+				  Red.style.left = 1050 + 'px';
 				}
 				else{
-					Red.style.top = 420 + 'px';
-					Red.style.left = 52 + 'px';
+					Red.style.top = 235 + 'px';
+					Red.style.left = 80 + 'px';
 				}
 		}
             window.onload = init;
