@@ -77,6 +77,11 @@
 	position: absolute;
 	top: 70px;
   }
+  img.video{
+	position: absolute;
+	top: 156px;
+	left: 779px;
+  }
 
 /*********************************************************************************/
 /* List Styles                                                                   */
@@ -587,4 +592,3 @@
 		color: rgba(255,255,255,0.4);
 	}
 	
-
