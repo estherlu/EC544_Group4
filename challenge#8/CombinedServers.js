@@ -113,7 +113,7 @@ io.on('connection', function(socket){
   });
  socket.on('remoteCar', function(msg){
     CARStatus = msg;
-    sp.write(msg + "\n");
+    sp1.write(msg + "\n");
     console.log('message: ' + msg); // + msg
     io.emit('updated remoteCar', msg);
   });
