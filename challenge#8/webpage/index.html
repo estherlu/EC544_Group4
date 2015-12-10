@@ -23,6 +23,7 @@ Released   : 20140322
 <script>
 	alert("!1");
     var socket = io();
+    //alert("!@#$");
 </script>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
@@ -35,6 +36,8 @@ Released   : 20140322
   socket.on('location', function(location){ 
     partition = parseInt(location);
   });
+
+
 
   /*socket.on('location', function(location){
     //var location1 = 5;//parseInt(location) / 6 * 25;
@@ -73,8 +76,9 @@ Released   : 20140322
                
 			   //Red.style.position= 'absolute'; 
 			   //alert("2");
-                           Red.style.left ="1050px";
-			   Red.style.top="240px";
+                          // Red.style.left ="1050px";
+			   //Red.style.top="240px";
+			   
 
 /*			   function forward(){
 		if(flag){
@@ -128,16 +132,20 @@ function onoff(){
 	}
 }*/
 			
-			function moveRight(partition){
-                       function forward(){
+function moveRight(partition){
+	//alert("F");
+}
+
+function forward(){
+	alert("F");
 		if(flag){		   
-		//alert("F");
 		remoteCar = 2;
 		socket.emit('remoteCar', remoteCar.toString());
 		}
 }
+
 function back(){
-	//alert("B");
+	alert("B");
 	if(flag){
 		//alert("F");
 		remoteCar = 3;
@@ -145,7 +153,7 @@ function back(){
 	}
 }
 function left(){
-	//alert("L");
+	alert("L");
 	if(flag){
 		//alert("F");
 		remoteCar = 4;
@@ -169,8 +177,9 @@ function stop(){
 	}
 }
 function onoff(){
+	alert("in off");
 	flag = !flag;
-	//alert(flag.toString());
+	alert(flag.toString());
 	if(flag){
 		remoteCar = 1;
 		socket.emit('remoteCar', remoteCar.toString());
@@ -212,12 +221,11 @@ function onoff(){
 					Red.style.top = 235 + 'px';
 					Red.style.left = 80 + 'px';
 				}
-		}
-			//alert("before");
-			setInterval(function(){
-			//alert("after");	
-			moveRight(partition);
-			   }, 1000);
+
+		  	alert("64");
+			alert("before");
+			setInterval(function(){ moveRight(partition);}, 1000);
+			alert("after");
 
 </script>
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
@@ -246,7 +254,7 @@ function onoff(){
 <div id="welcome" class="container">
 <div class="title">
 <label class="switch" style="margin-left:445px; margin-top:20px;">
-	<input id="checkbox" class="switch-input" type="checkbox" onchange="onoff()"/>
+	<input id="checkbox" class="switch-input" type="checkbox" onclick onchange="onoff()"/>
 	<span class="switch-label" data-on="On" data-off="Off"></span> 
 	<span class="switch-handle"></span> 
 </label>
