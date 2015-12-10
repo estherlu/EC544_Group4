@@ -23,121 +23,68 @@ Released   : 20140322
 <script>
 	alert("!1");
     var socket = io();
+    //alert("!@#$");
 </script>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 <script>
-  //var location1 = [0,0];
-  //var location2 = [0,0]; 
-  //var location3 = [0,0];
-  var partition;
 
-  socket.on('location', function(location){ 
+var partition = 2;
+var remoteCar;
+var flag = false;
+
+function init(){
+	var Red = document.getElementById("Red");
+	Red.style.left = 220; //"220px";
+   	Red.style.top=//"240px";
+   	alert("red detected");
+	alert("init");
+}
+
+  
+
+ /*socket.on('location', function(location){ 
     partition = parseInt(location);
-  });
-
-  /*socket.on('location', function(location){
-    //var location1 = 5;//parseInt(location) / 6 * 25;
   });*/
-	var remoteCar;
-	var flag = false;
 
-	 var Red = null;
-	 var xbeer = null;
-     var xbeel = null;
-     var xbeeb = null;
-	 var i=1;
-			Red = document.getElementById('Red');
-			
-			//alert("2");
-			 /*xbeer = document.getElementById('right');
-			   xbeel = document.getElementById('left');
-			   xbeeb = document.getElementById('bottom');
-			   xbeeb2 = document.getElementById('bottom2');
-               Red.style.position= 'absolute'; 
-               Red.style.left ="210px";
-			   Red.style.top="250px";
-			   xbeer.style.position='absolute';
-			   xbeer.style.left="1100px";
-			   xbeer.style.top="220px";
-			   xbeel.style.position='absolute';
-			   xbeel.style.left="52px";
-			   xbeel.style.top="220px";
-			   xbeeb.style.position='absolute';
-			   xbeeb.style.left="52px";
-			   xbeeb.style.top="620px";
-			   xbeeb2.style.position='absolute';
-			   xbeeb2.style.left="1100px";
-			   xbeeb2.style.top="620px";*/
-			   //Red.style.position= 'absolute'; 
-               
-			   //Red.style.position= 'absolute'; 
-			   //alert("2");
-                           Red.style.left ="1050px";
-			   Red.style.top="240px";
+ 	
+function moveRight(partition){
+	
+	//var index = partition;
+	var index = 5;
+	alert("in move right");
+	if(index<=7&&index>=1)
+	{
+		Red.style.left = -80 + Math.round(index* 160) + 'px';
+		Red.style.top = 70 + 'px';
+	}
+	else if(index>=9&&index<=15)
+	{
+	  Red.style.left = -80 + (16-index) * 160 + 'px';
+	  Red.style.top = 400 + 'px';
+	  alert("index in");
+	}
+	else if(index == 8)
+	{
+	  Red.style.top = 235 + 'px';
+	  Red.style.left = 1050 + 'px';
+	}
+	else{
+		Red.style.top = 235 + 'px';
+		Red.style.left = 80 + 'px';
+	}
+}
 
-/*			   function forward(){
-		if(flag){
-		//alert("F");
-		remoteCar = 2;
-		socket.emit('remoteCar', remoteCar.toString());
-	}
-}
-}
-function back(){
-	//alert("B");
-	if(flag){
-		//alert("F");
-		remoteCar = 3;
-		socket.emit('remoteCar', remoteCar.toString());
-	}
-}
-function left(){
-	//alert("L");
-	if(flag){
-		//alert("F");
-		remoteCar = 4;
-		socket.emit('remoteCar', remoteCar.toString());
-	}
-}
-function right(){
-	//alert("R");
-	if(flag){
-		//alert("F");
-		remoteCar = 5;
-		socket.emit('remoteCar', remoteCar.toString());
-	}
-}
-function stop(){
-	//alert("S");
-	if(flag){
-		//alert("F");
-		remoteCar = 6;
-		socket.emit('remoteCar', remoteCar.toString());
-	}
-}
-function onoff(){
-	flag = !flag;
-	//alert(flag.toString());
-	if(flag){
-		rmoteCar = 1;
-		socket.emit('remoteCar', remoteCar.toString());
-	}else{
-		remoteCar = 0;
-		socket.emit('remoteCar', remoteCar.toString());
-	}
-}*/
-			
-			function moveRight(partition){
-                       function forward(){
+function forward(){
+	alert("F");
 		if(flag){		   
-		//alert("F");
 		remoteCar = 2;
 		socket.emit('remoteCar', remoteCar.toString());
 		}
 }
+
 function back(){
-	//alert("B");
+	alert("B");
 	if(flag){
 		//alert("F");
 		remoteCar = 3;
@@ -145,7 +92,7 @@ function back(){
 	}
 }
 function left(){
-	//alert("L");
+	alert("L");
 	if(flag){
 		//alert("F");
 		remoteCar = 4;
@@ -169,8 +116,9 @@ function stop(){
 	}
 }
 function onoff(){
+	alert("in off");
 	flag = !flag;
-	//alert(flag.toString());
+	alert(flag.toString());
 	if(flag){
 		remoteCar = 1;
 		socket.emit('remoteCar', remoteCar.toString());
@@ -179,45 +127,10 @@ function onoff(){
 		socket.emit('remoteCar', remoteCar.toString());
 	}
 }		
-                 		var index = partition;
-				// if(index == 1)
-				// {
-				// Red.style.left = 80  + 'px';
-				// Red.style.top = 40 + 'px';
-				// }
-				var j = 0;
-				if(index<=7&&index>=1)
-				{
-					while(j!=Math.round(index*160)){
-					Red.style.left = -80 + 20 + 'px';
-					}        
-					j+=20;
-					Red.style.top = 70 + 'px';
-				//alert("1");
-				}
-				else if(index>=9&&index<=15)
-				{
-				  while(j!=Math.round((16-index)*160)){
-				  Red.style.left = -80 + (16-index) * 160 + 'px';
-				  }
-				  j+=20;
-				  Red.style.top = 400 + 'px';
-				}
-				else if(index == 8)
-				{
-				  Red.style.top = 235 + 'px';
-				  Red.style.left = 1050 + 'px';
-				}
-				else{
-					Red.style.top = 235 + 'px';
-					Red.style.left = 80 + 'px';
-				}
-		}
-			//alert("before");
-			setInterval(function(){
-			//alert("after");	
-			moveRight(partition);
-			   }, 1000);
+
+
+window.onload = function(){init();}
+setInterval(function(){ moveRight(partition);}, 1000);
 
 </script>
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
@@ -234,26 +147,25 @@ function onoff(){
 </div>
 <div class="wrapper">
   <img id="room" class="displayed" src="images/4floor.jpg" width="1064" height="400" alt=""/>
-  <img id="Red" class="point" src="images/Red.png" alt="CAR" position="absolute" height="30px" width="30px"/>
+  <img id="Red" class="point" src="images/Red.png" height="30px" width="30px"/>
   <img id="video" src="http://ec544d.ddns.net:8081/" class="video" position="absolute" height="160px" width="240px"/>
 
-    <button onClick="forward()" class="myButton" style="position: absolute; top: 136px; left: 230px;">F</button>
-<p><button onClick="right()" class="myButtonPink" style="position: absolute; top: 210px; left: 318px;">R</button>
-<button onClick="stop()" class="myButtonRed" style="position: absolute; top: 210px; left: 230px;">S</button>
-<button onClick="left()" class="myButtonBlue" style="position: absolute; top: 210px; left: 147px;">L</button>
-</p>
-<button onClick="back()" class="myButton" style="position: absolute; top: 285px; left: 230px;">B</button>
-<div id="welcome" class="container">
-<div class="title">
-<label class="switch" style="margin-left:445px; margin-top:20px;">
-	<input id="checkbox" class="switch-input" type="checkbox" onchange="onoff()"/>
-	<span class="switch-label" data-on="On" data-off="Off"></span> 
-	<span class="switch-handle"></span> 
-</label>
+	<button onClick="forward()" class="myButton" style="position: absolute; top: 136px; left: 230px;">F</button>
+	<p><button onClick="right()" class="myButtonPink" style="position: absolute; top: 210px; left: 318px;">R</button>
+	<button onClick="stop()" class="myButtonRed" style="position: absolute; top: 210px; left: 230px;">S</button>
+	<button onClick="left()" class="myButtonBlue" style="position: absolute; top: 210px; left: 147px;">L</button>
+	</p>
+	<button onClick="back()" class="myButton" style="position: absolute; top: 285px; left: 230px;">B</button>
+	<div id="welcome" class="container">
+	<div class="title">
+	<label class="switch" style="margin-left:445px; margin-top:20px;">
+		<input id="checkbox" class="switch-input" type="checkbox" onclick onchange="onoff()"/>
+		<span class="switch-label" data-on="On" data-off="Off"></span> 
+		<span class="switch-handle"></span> 
+	</label>
 	</div>
   </div>
 </div>
-
 
 </body>
 </html>
