@@ -38,7 +38,17 @@ int Ki = 0.05;  // initial 0.05
 int Kd = 0.5;   // initial 0.5
 PID PIDleft(&Input, &Output, &setPt, Kp, Ki, Kd, DIRECT);
 /////////////////////////////////////////////
-
+long CalculateUltrasonic1(){
+   digitalWrite(TRIG_PIN, LOW);
+   delayMicroseconds(2);
+   digitalWrite(TRIG_PIN, HIGH);
+   delayMicroseconds(10);
+   digitalWrite(TRIG_PIN, LOW);
+   long duration = pulseIn(ECHO_PIN,HIGH);
+  
+   // convert the time into a distance
+   return duration / 29.1 / 2 ;
+}
 void setup() {
   // PIN setup
   pinMode(LED_TURN, OUTPUT);
@@ -89,6 +99,56 @@ void calibrateESC(){
 }
 
 void loop() {
+  if (XBee.available())
+   {
+      int tmp = XBee.read();
+     if(cmnd == 49 || cmnd==50)
+     {
+        if(tmp=='1')
+        {
+          cmnd=51;
+          esc.write(90);
+          wheels.write(110);   
+        }
+     }
+     else if(cmnd==51)
+     {
+      if(tmp=='0')
+      {
+        cmnd=49;
+        setPt=CalculateUltrasonic1();
+        esc.write(80);
+        wheels.write(110);
+        
+      }
+      if(tmp=='2')//forward
+      {
+        wheels.write(110);
+        esc.write(80);   
+        
+      }
+      if(tmp=='3')//backwards
+      {
+        esc.write(100);
+        wheels.write(110);   
+      }
+      if(tmp=='5') // right
+      {
+        wheels.write(60); 
+       // esc.write(80);    
+      }
+      if(tmp=='4')//left
+      {
+        wheels.write(140); 
+        //esc.write(80);  
+          
+      }
+      if(tmp=='6')//stop
+      {
+        esc.write(90);  
+      }
+    }
+   }  
   if (cmnd == 49 || cmnd == 50)
   {
     distanceCmLast = distanceCm;
@@ -178,7 +238,15 @@ void loop() {
         esc.write(76);
         wheels.write(110);
         if (count == 2 || count == 4 || count == 6 || count == 8) delay(1500);
-        setPt = (distanceCm < 10) ? (distanceCm + 15) : distanceCm;
+        digitalWrite(TRIG_PIN, LOW);
+        delayMicroseconds(2);
+        digitalWrite(TRIG_PIN, HIGH);
+        delayMicroseconds(10);
+        digitalWrite(TRIG_PIN, LOW);
+        long tmpduration = pulseIn(ECHO_PIN,HIGH);
+        // convert the time into a distance
+        long tmpdistanceCm = tmpduration / 29.1 / 2 ;
+        setPt = (tmpdistanceCm < 10) ? (tmpdistanceCm + 15) : tmpdistanceCm;
         digitalWrite(LED_TURN, LOW);
       }
     }
