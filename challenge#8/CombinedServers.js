@@ -7,8 +7,9 @@ var XBeeAPI = new xbee_api.XBeeAPI({
   api_mode: 2
 });
 
-var portName = process.argv[2];
-
+var portName1 = process.argv[2];//AT
+var portName2 = process.argv[3];//API
+var CARStatus = '0';
 var sampleDelay = 3000;
 
 var app = require('express')();
@@ -106,8 +107,15 @@ portConfig = {
 };
 
 io.on('connection', function(socket){
-  console.log('a user connected');
+  console.log('a user connected'); 
   socket.on('disconnect', function(){
+
+  });
+ socket.on('remoteCar', function(msg){
+    CARStatus = msg;
+    sp.write(msg + "\n");
+    console.log('message: ' + msg); // + msg
+    io.emit('updated remoteCar', msg);
   });
 });
 
@@ -116,8 +124,9 @@ http.listen(4001, function(){
   console.log('listening on *:4001');
 });
 
-var sp;
-sp = new SerialPort.SerialPort(portName, portConfig);
+var sp1, sp2;
+sp1 = new SerialPort.SerialPort(portName1, portConfig);//AT
+sp2 = new SerialPort.SerialPort(portName2, portConfig);//API
 
 //Create a packet to be sent to all other XBEE units on the PAN.
 // The value of 'data' is meaningless, for now.
@@ -130,10 +139,10 @@ var RSSIRequestPacket = {
 }
 
 var requestRSSI = function(){
-  sp.write(XBeeAPI.buildFrame(RSSIRequestPacket));
+  sp2.write(XBeeAPI.buildFrame(RSSIRequestPacket));
 }
 
-sp.on("open", function () {
+sp2.on("open", function () {
   console.log('open');
   requestRSSI();
   setInterval(requestRSSI, sampleDelay);
@@ -162,6 +171,9 @@ XBeeAPI.on("frame_object", function(frame) {
       dataset[0][3] = frame.data[0];
       console.log(dataset[0][3]);
     }
+ 
+
+
 
      var store = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 

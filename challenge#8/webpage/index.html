@@ -21,6 +21,7 @@ Released   : 20140322
 <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
 <script src="/socket.io/socket.io.js"></script>
 <script>
+	alert("!1");
     var socket = io();
 </script>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
@@ -46,7 +47,6 @@ Released   : 20140322
      var xbeel = null;
      var xbeeb = null;
 	 var i=1;
-        function init(){
 			Red = document.getElementById('Red');
 			
 			//alert("2");
@@ -73,15 +73,68 @@ Released   : 20140322
                
 			   //Red.style.position= 'absolute'; 
 			   //alert("2");
-               Red.style.left ="1050px";
+                           Red.style.left ="1050px";
 			   Red.style.top="240px";
 
-			   /*function forward(){
-
-		alert("F");
+/*			   function forward(){
+		if(flag){
+		//alert("F");
 		remoteCar = 2;
 		socket.emit('remoteCar', remoteCar.toString());
 	}
+}
+}
+function back(){
+	//alert("B");
+	if(flag){
+		//alert("F");
+		remoteCar = 3;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}
+function left(){
+	//alert("L");
+	if(flag){
+		//alert("F");
+		remoteCar = 4;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}
+function right(){
+	//alert("R");
+	if(flag){
+		//alert("F");
+		remoteCar = 5;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}
+function stop(){
+	//alert("S");
+	if(flag){
+		//alert("F");
+		remoteCar = 6;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}
+function onoff(){
+	flag = !flag;
+	//alert(flag.toString());
+	if(flag){
+		rmoteCar = 1;
+		socket.emit('remoteCar', remoteCar.toString());
+	}else{
+		remoteCar = 0;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}*/
+			
+			function moveRight(partition){
+                       function forward(){
+		if(flag){		   
+		//alert("F");
+		remoteCar = 2;
+		socket.emit('remoteCar', remoteCar.toString());
+		}
 }
 function back(){
 	//alert("B");
@@ -125,14 +178,8 @@ function onoff(){
 		remoteCar = 0;
 		socket.emit('remoteCar', remoteCar.toString());
 	}
-}*/
-	//var index = location1;
-	//alert("end init");
-            
-}
-			
-			function moveRight(partition){
-				var index = partition;
+}		
+                 		var index = partition;
 				// if(index == 1)
 				// {
 				// Red.style.left = 80  + 'px';
@@ -166,7 +213,6 @@ function onoff(){
 					Red.style.left = 80 + 'px';
 				}
 		}
-            window.onload = init;
 			//alert("before");
 			setInterval(function(){
 			//alert("after");	
