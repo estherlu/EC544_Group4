@@ -28,204 +28,112 @@ Released   : 20140322
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 <script>
-  //var location1 = [0,0];
-  //var location2 = [0,0]; 
-  //var location3 = [0,0];
-  var partition;
 
-  socket.on('location', function(location){ 
+  var partition = 2;
+
+  /*socket.on('location', function(location){ 
     partition = parseInt(location);
-  });
-
-
-
-  /*socket.on('location', function(location){
-    //var location1 = 5;//parseInt(location) / 6 * 25;
   });*/
+
 	var remoteCar;
 	var flag = false;
 
-	 var Red = null;
-	 var xbeer = null;
-     var xbeel = null;
-     var xbeeb = null;
-	 var i=1;
-			Red = document.getElementById('Red');
-			
-			//alert("2");
-			 /*xbeer = document.getElementById('right');
-			   xbeel = document.getElementById('left');
-			   xbeeb = document.getElementById('bottom');
-			   xbeeb2 = document.getElementById('bottom2');
-               Red.style.position= 'absolute'; 
-               Red.style.left ="210px";
-			   Red.style.top="250px";
-			   xbeer.style.position='absolute';
-			   xbeer.style.left="1100px";
-			   xbeer.style.top="220px";
-			   xbeel.style.position='absolute';
-			   xbeel.style.left="52px";
-			   xbeel.style.top="220px";
-			   xbeeb.style.position='absolute';
-			   xbeeb.style.left="52px";
-			   xbeeb.style.top="620px";
-			   xbeeb2.style.position='absolute';
-			   xbeeb2.style.left="1100px";
-			   xbeeb2.style.top="620px";*/
-			   //Red.style.position= 'absolute'; 
-               
-			   //Red.style.position= 'absolute'; 
-			   //alert("2");
-                          // Red.style.left ="1050px";
-			   //Red.style.top="240px";
-			   
+	var Red = null;
 
-/*			   function forward(){
-		if(flag){
-		//alert("F");
-		remoteCar = 2;
-		socket.emit('remoteCar', remoteCar.toString());
-	}
-}
-}
-function back(){
-	//alert("B");
-	if(flag){
-		//alert("F");
-		remoteCar = 3;
-		socket.emit('remoteCar', remoteCar.toString());
-	}
-}
-function left(){
-	//alert("L");
-	if(flag){
-		//alert("F");
-		remoteCar = 4;
-		socket.emit('remoteCar', remoteCar.toString());
-	}
-}
-function right(){
-	//alert("R");
-	if(flag){
-		//alert("F");
-		remoteCar = 5;
-		socket.emit('remoteCar', remoteCar.toString());
-	}
-}
-function stop(){
-	//alert("S");
-	if(flag){
-		//alert("F");
-		remoteCar = 6;
-		socket.emit('remoteCar', remoteCar.toString());
-	}
-}
-function onoff(){
-	flag = !flag;
-	//alert(flag.toString());
-	if(flag){
-		rmoteCar = 1;
-		socket.emit('remoteCar', remoteCar.toString());
-	}else{
-		remoteCar = 0;
-		socket.emit('remoteCar', remoteCar.toString());
-	}
-}*/
-			
-function moveRight(partition){
-	//alert("F");
-}
+	var i=1;
+	Red = document.getElementById('Red');
+	alert("here");		
+   //Red.style.left ="1050px";
+   //Red.style.top="240px";
+   
 
-function forward(){
-	alert("F");
-		if(flag){		   
-		remoteCar = 2;
-		socket.emit('remoteCar', remoteCar.toString());
+			
+	function moveRight(partition){
+		
+		var index = 13;
+		alert("in move right");
+		if(index<=7&&index>=1)
+		{
+			Red.style.left = -80 + Math.round(index* 160) + 'px';
+			Red.style.top = 70 + 'px';
 		}
-}
+		else if(index>=9&&index<=15)
+		{
+		  Red.style.left = -80 + (16-index) * 160 + 'px';
+		  Red.style.top = 400 + 'px';
+		  alert("index in");
+		}
+		else if(index == 8)
+		{
+		  Red.style.top = 235 + 'px';
+		  Red.style.left = 1050 + 'px';
+		}
+		else{
+			Red.style.top = 235 + 'px';
+			Red.style.left = 80 + 'px';
+		}
+	}
 
-function back(){
-	alert("B");
-	if(flag){
-		//alert("F");
-		remoteCar = 3;
-		socket.emit('remoteCar', remoteCar.toString());
+	function forward(){
+		alert("F");
+			if(flag){		   
+			remoteCar = 2;
+			socket.emit('remoteCar', remoteCar.toString());
+			}
 	}
-}
-function left(){
-	alert("L");
-	if(flag){
-		//alert("F");
-		remoteCar = 4;
-		socket.emit('remoteCar', remoteCar.toString());
-	}
-}
-function right(){
-	//alert("R");
-	if(flag){
-		//alert("F");
-		remoteCar = 5;
-		socket.emit('remoteCar', remoteCar.toString());
-	}
-}
-function stop(){
-	//alert("S");
-	if(flag){
-		//alert("F");
-		remoteCar = 6;
-		socket.emit('remoteCar', remoteCar.toString());
-	}
-}
-function onoff(){
-	alert("in off");
-	flag = !flag;
-	alert(flag.toString());
-	if(flag){
-		remoteCar = 1;
-		socket.emit('remoteCar', remoteCar.toString());
-	}else{
-		remoteCar = 0;
-		socket.emit('remoteCar', remoteCar.toString());
-	}
-}		
-                 		var index = partition;
-				// if(index == 1)
-				// {
-				// Red.style.left = 80  + 'px';
-				// Red.style.top = 40 + 'px';
-				// }
-				var j = 0;
-				if(index<=7&&index>=1)
-				{
-					while(j!=Math.round(index*160)){
-					Red.style.left = -80 + 20 + 'px';
-					}        
-					j+=20;
-					Red.style.top = 70 + 'px';
-				//alert("1");
-				}
-				else if(index>=9&&index<=15)
-				{
-				  while(j!=Math.round((16-index)*160)){
-				  Red.style.left = -80 + (16-index) * 160 + 'px';
-				  }
-				  j+=20;
-				  Red.style.top = 400 + 'px';
-				}
-				else if(index == 8)
-				{
-				  Red.style.top = 235 + 'px';
-				  Red.style.left = 1050 + 'px';
-				}
-				else{
-					Red.style.top = 235 + 'px';
-					Red.style.left = 80 + 'px';
-				}
 
-		  	alert("64");
-			alert("before");
-			setInterval(function(){ moveRight(partition);}, 1000);
-			alert("after");
+	function back(){
+		alert("B");
+		if(flag){
+			//alert("F");
+			remoteCar = 3;
+			socket.emit('remoteCar', remoteCar.toString());
+		}
+	}
+	function left(){
+		alert("L");
+		if(flag){
+			//alert("F");
+			remoteCar = 4;
+			socket.emit('remoteCar', remoteCar.toString());
+		}
+	}
+	function right(){
+		//alert("R");
+		if(flag){
+			//alert("F");
+			remoteCar = 5;
+			socket.emit('remoteCar', remoteCar.toString());
+		}
+	}
+	function stop(){
+		//alert("S");
+		if(flag){
+			//alert("F");
+			remoteCar = 6;
+			socket.emit('remoteCar', remoteCar.toString());
+		}
+	}
+	function onoff(){
+		alert("in off");
+		flag = !flag;
+		alert(flag.toString());
+		if(flag){
+			remoteCar = 1;
+			socket.emit('remoteCar', remoteCar.toString());
+		}else{
+			remoteCar = 0;
+			socket.emit('remoteCar', remoteCar.toString());
+		}
+	}		
+	
+	var index = partition;
+
+
+	  	alert("64");
+		alert("before");
+		setInterval(function(){ moveRight(partition);}, 1000);
+		alert("after");
 
 </script>
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
