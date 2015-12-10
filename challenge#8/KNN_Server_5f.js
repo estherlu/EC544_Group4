@@ -67,7 +67,7 @@ var trainingSet = [
 [68, 62, 58, 99],
 [55, 58, 66, 102],
 [59, 43, 71, 102],
-[61, 34, 67, 102]
+[61, 34, 67, 102],
 
 [35, 38, 80, 102],
 
@@ -91,7 +91,7 @@ var trainingSet = [
 [37, 34, 76, 102],
 [36, 40, 82, 99]
 ]
-var predictions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,17,18, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,17,18, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,17,18]
+var predictions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 
 knn.train(trainingSet, predictions);
 
@@ -163,9 +163,26 @@ XBeeAPI.on("frame_object", function(frame) {
       console.log(dataset[0][3]);
     }
 
-    var ans = knn.predict(dataset);
-    io.emit('location', ans);
+    var ans_array = [0,0,0,0,0,0,0]
+
+    for(var i=0; i<7; i++)
+    {
+      ans_array[i] = knn.predict(dataset);
+    }
+
+    var frequency = {};  // array of frequency.
+    var max = 0;  // holds the max frequency.
+    var result;   // holds the max frequency element.
+    for(var v in store) {
+            frequency[store[v]]=(frequency[store[v]] || 0)+1; // increment frequency.
+            if(frequency[store[v]] > max) { // is this frequency > max so far ?
+                    max = frequency[store[v]];  // update max.
+                    result = store[v];          // update result.
+            }
+    }
+
+    io.emit('location', result);
     console.log("reach here");
-    console.log("answer: " + ans);
+    console.log("answer: " + result);
   }
 });
