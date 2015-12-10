@@ -21,51 +21,42 @@ Released   : 20140322
 <link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
 <script src="/socket.io/socket.io.js"></script>
 <script>
-	alert("!1");
     var socket = io();
-    //alert("!@#$");
 </script>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 <script>
 
-var partition = 2;
+var partition;
 var remoteCar;
 var flag = false;
 
 function init(){
 	var Red = document.getElementById("Red");
-	Red.style.left = 220; //"220px";
-   	Red.style.top=//"240px";
-   	alert("red detected");
-	alert("init");
+	Red.style.left = "220px";
+   	Red.style.top="240px";
 }
 
   
 
- /*socket.on('location', function(location){ 
+ socket.on('location', function(location){ 
     partition = parseInt(location);
-  });*/
+  });
 
  	
 function moveRight(partition){
 	
-	//var index = partition;
-	var index = 5;
-	alert("in move right");
+	var index = partition;
+	//var index = 5;
 	if(index<=7&&index>=1)
 	{
-		//var oldleft = Red.style.left;
 		Red.style.left = -80 + Math.round(index* 160) + 'px';
-		//var delta = oldleft-Red.style.left;
-		//$("div.point").animate({left: delta + 'px'});
 		Red.style.top = 70 + 'px';
 	}
 	else if(index>=9&&index<=15)
 	{
 	  Red.style.left = -80 + (16-index) * 160 + 'px';
 	  Red.style.top = 400 + 'px';
-	  alert("index in");
 	}
 	else if(index == 8)
 	{
@@ -79,7 +70,6 @@ function moveRight(partition){
 }
 
 function forward(){
-	alert("F");
 		if(flag){		   
 		remoteCar = 2;
 		socket.emit('remoteCar', remoteCar.toString());
@@ -87,15 +77,12 @@ function forward(){
 }
 
 function back(){
-	alert("B");
 	if(flag){
-		//alert("F");
 		remoteCar = 3;
 		socket.emit('remoteCar', remoteCar.toString());
 	}
 }
 function left(){
-	alert("L");
 	if(flag){
 		//alert("F");
 		remoteCar = 4;
@@ -103,9 +90,7 @@ function left(){
 	}
 }
 function right(){
-	//alert("R");
 	if(flag){
-		//alert("F");
 		remoteCar = 5;
 		socket.emit('remoteCar', remoteCar.toString());
 	}
@@ -113,15 +98,13 @@ function right(){
 function stop(){
 	//alert("S");
 	if(flag){
-		//alert("F");
 		remoteCar = 6;
 		socket.emit('remoteCar', remoteCar.toString());
 	}
 }
 function onoff(){
-	alert("in off");
 	flag = !flag;
-	alert(flag.toString());
+//	alert(flag.toString());
 	if(flag){
 		remoteCar = 1;
 		socket.emit('remoteCar', remoteCar.toString());
@@ -133,7 +116,7 @@ function onoff(){
 
 
 window.onload = function(){init();}
-setInterval(function(){ moveRight(partition);}, 1000);
+setInterval(function(){ moveRight(partition);}, 2000);
 
 </script>
 <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->

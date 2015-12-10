@@ -177,9 +177,9 @@ XBeeAPI.on("frame_object", function(frame) {
     }
  
 
+var result = knn.predict(dataset);
 
-
-     var store = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+/*     var store = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
     for(var i=0; i<23; i++)
     {
@@ -195,10 +195,10 @@ XBeeAPI.on("frame_object", function(frame) {
                     max = frequency[store[v]];  // update max.
                     result = store[v];          // update result.
             }
-    }
+    }*/
 
     io.emit('location', result);
     console.log("reach here");
-    console.log("answer: " + result);
+    console.log("partition: " + result);
   }
 });
