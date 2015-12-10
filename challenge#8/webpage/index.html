@@ -55,7 +55,10 @@ function moveRight(partition){
 	alert("in move right");
 	if(index<=7&&index>=1)
 	{
+		//var oldleft = Red.style.left;
 		Red.style.left = -80 + Math.round(index* 160) + 'px';
+		//var delta = oldleft-Red.style.left;
+		//$("div.point").animate({left: delta + 'px'});
 		Red.style.top = 70 + 'px';
 	}
 	else if(index>=9&&index<=15)

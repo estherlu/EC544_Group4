@@ -1,0 +1,325 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Quicksand:400,700|Questrial" rel="stylesheet" />
+<link href="default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+<script src="/socket.io/socket.io.js"></script>
+<script>
+	alert("!1");
+    var socket = io();
+    //alert("!@#$");
+</script>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+
+var partition = 2;
+var remoteCar;
+var flag = false;
+
+/*function init(){
+	var Red = document.getElementById("Red");
+	Red.style.left = 220; //"220px";
+   	Red.style.top=//"240px";
+   	alert("red detected");
+	alert("init");
+}*/
+
+  
+
+ /*socket.on('location', function(location){ 
+    partition = parseInt(location);
+  });*/
+
+ 	
+/*function moveRight(partition){
+	
+	//var index = partition;
+	var index = 5;
+	alert("in move right");
+	if(index<=7&&index>=1)
+	{
+		//var oldleft = Red.style.left;
+		Red.style.left = -80 + Math.round(index* 160) + 'px';
+		//var delta = oldleft-Red.style.left;
+		//$("div.point").animate({left: delta + 'px'});
+		Red.style.top = 70 + 'px';
+	}
+	else if(index>=9&&index<=15)
+	{
+	  Red.style.left = -80 + (16-index) * 160 + 'px';
+	  Red.style.top = 400 + 'px';
+	  alert("index in");
+	}
+	else if(index == 8)
+	{
+	  Red.style.top = 235 + 'px';
+	  Red.style.left = 1050 + 'px';
+	}
+	else{
+		Red.style.top = 235 + 'px';
+		Red.style.left = 80 + 'px';
+	}
+}*/
+
+function forward(){
+	//alert("F");
+		if(flag){		   
+		remoteCar = 2;
+		socket.emit('remoteCar', remoteCar.toString());
+		}
+}
+
+function back(){
+	//alert("B");
+	if(flag){
+		//alert("F");
+		remoteCar = 3;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}
+function left(){
+	//alert("L");
+	if(flag){
+		//alert("F");
+		remoteCar = 4;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}
+function right(){
+	//alert("R");
+	if(flag){
+		//alert("F");
+		remoteCar = 5;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}
+function stop(){
+	//alert("S");
+	if(flag){
+		//alert("F");
+		remoteCar = 6;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}
+function onoff(){
+	//alert("in off");
+	flag = !flag;
+	alert(flag.toString());
+	if(flag){
+		remoteCar = 1;
+		socket.emit('remoteCar', remoteCar.toString());
+	}else{
+		remoteCar = 0;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}		
+
+
+//window.onload = function(){init();}
+//setInterval(function(){ moveRight(partition);}, 1000);
+</script>
+<title>Untitled Document</title>
+<style type="text/css">
+<!--
+body {
+	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+	background-color: #42413C;
+	margin: 0;
+	padding: 0;
+	color: #000;
+}
+
+/* ~~ Element/tag selectors ~~ */
+ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing div. The remaining bottom margin will hold it away from any elements that follow. */
+	padding-right: 15px;
+	padding-left: 15px; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
+	text-align:center;
+	background-color:rgba(0,0,0,0.1);
+	color:#00000;
+	font-size:36px
+	height:30%;
+}
+a img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
+	border: none;
+}
+/* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
+a:link {
+	color: #42413C;
+	text-decoration: underline; /* unless you style your links to look extremely unique, it's best to provide underlines for quick visual identification */
+}
+a:visited {
+	color: #6E6C64;
+	text-decoration: underline;
+}
+a:hover, a:active, a:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
+	text-decoration: none;
+}
+
+/* ~~ this fixed width container surrounds all other elements ~~ */
+.container {
+	width: 960px;
+    height: 2000px;
+	background-color: #FFF;
+	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
+}
+
+/* ~~ This is the layout information. ~~ 
+
+1) Padding is only placed on the top and/or bottom of the div. The elements within this div have padding on their sides. This saves you from any "box model math". Keep in mind, if you add any side padding or border to the div itself, it will be added to the width you define to create the *total* width. You may also choose to remove the padding on the element in the div and place a second div within it with no width and the padding necessary for your design.
+
+*/
+.content {
+
+	padding: 10px 0;
+}
+
+/* ~~ miscellaneous float/clear classes ~~ */
+.fltrt {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* this class can be used to float an element left in your page. The floated element must precede the element it should be next to on the page. */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* this class can be placed on a <br /> or empty div as the final element following the last floated div (within the #container) if the overflow:hidden on the .container is removed */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
+			.myButton {
+	background-color:#f5f5f5;
+	-moz-border-radius:65px;
+	-webkit-border-radius:65px;
+	border-radius:65px;
+	border:1px;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Arial;
+	font-size:27px;
+	padding:64px 64px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+	position: absolute; 
+	top: 35%; 
+	left: 43%;
+}
+.myButton:hover {
+	background-color:#7892c2;
+}
+
+.myButtonPink {
+	background-color:#f5f5f5;
+	-moz-border-radius:65px;
+	-webkit-border-radius:65px;
+	border-radius:65px;
+	border:1px;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Arial;
+	font-size:27px;
+	padding:64px 64px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+	position: absolute; top: 50%; left: 60%;
+}
+.myButtonPink:hover {
+	background-color:#7892c2;
+}
+
+.myButtonBlue {
+	background-color:#f5f5f5;
+	-moz-border-radius:65px;
+	-webkit-border-radius:65px;
+	border-radius:65px;
+	border:1px;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Arial;
+	font-size:27px;
+	padding:64px 64px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+	position: absolute; top: 50%; left: 25%;
+}
+.myButtonBlue:hover {
+	background-color:#7892c2;
+}
+
+.myButtonRed {
+	-moz-box-shadow: 0px 0px 0px 0px #3dc21b;
+	-webkit-box-shadow: 0px 0px 0px 0px #3dc21b;
+	box-shadow: 0px 0px 0px 0px #3dc21b;
+	background-color:#c74545;
+	-moz-border-radius:65px;
+	-webkit-border-radius:65px;
+	border-radius:65px;
+	border:1px solid #ab1919;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:27px;
+	padding:64px 64px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #662828;
+	position: absolute; top: 50%; left: 43%;
+}
+.myButtonRed:hover {
+	background-color:#bd2a2a;
+}
+
+
+.myButtonBack {
+	background-color: #f5f5f5;
+	-moz-border-radius: 65px;
+	-webkit-border-radius: 65px;
+	border-radius: 65px;
+	border: 1px;
+	display: inline-block;
+	cursor: pointer;
+	color: #000000;
+	font-family: Arial;
+	font-size: 27px;
+	padding: 64px 64px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #2f6627;
+	position: absolute;
+	top: 65%;
+	left: 43%;
+}
+.myButtonBack:hover {
+	background-color:#7892c2;
+}
+
+-->
+</style></head>
+
+<body>
+
+<div class="container">
+  <div class="content">
+  <h1>Dash Board</h1>
+  <p>  <button onClick="forward()" class="myButton">F</button>
+<p><button onClick="right()" class="myButtonPink">R</button>
+<button onClick="stop()" class="myButtonRed">S</button>
+<button onClick="left()" class="myButtonBlue">L</button>
+</p>
+<button onClick="back()" class="myButtonBack">B</button>
+</p>
+    <!-- end .content --></div>
+  <!-- end .container --></div>
+</body>
+</html>

@@ -24,7 +24,11 @@ app.use('/', express.static(__dirname + '/webpage'));
 
 
 app.get('/localization', function(req, res){
-  res.sendfile('webpage/index.html');
+  if(screen.width<=750) 
+  res.sendfile('webpage/mobile.html');
+  else{
+    res.sendfile('webpage/index.html');
+  }
 });
 
 var knn = new KNN();
