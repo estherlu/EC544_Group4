@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by TEMPLATED
+http://templated.co
+Released for free under the Creative Commons Attribution License
+
+Name       : Undeviating 
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20140322
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Challenge 8</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Quicksand:400,700|Questrial" rel="stylesheet" />
+<link href="default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io();
+</script>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+
+var partition;
+var remoteCar;
+var flag = false;
+
+function init(){
+/*	var Red = document.getElementById("Red");
+	Red.style.left = "220px";
+   	Red.style.top="240px";*/
+}
+
+  
+
+ socket.on('location', function(location){ 
+    partition = parseInt(location);
+  });
+
+ 	/*
+function moveRight(partition){
+	
+	var index = partition;
+	//var index = 5;
+	if(index<=7&&index>=1)
+	{
+		Red.style.left = -80 + Math.round(index* 160) + 'px';
+		Red.style.top = 70 + 'px';
+	}
+	else if(index>=9&&index<=15)
+	{
+	  Red.style.left = -80 + (16-index) * 160 + 'px';
+	  Red.style.top = 400 + 'px';
+	}
+	else if(index == 8)
+	{
+	  Red.style.top = 235 + 'px';
+	  Red.style.left = 1050 + 'px';
+	}
+	else{
+		Red.style.top = 235 + 'px';
+		Red.style.left = 80 + 'px';
+	}
+}*/
+
+function forward(){
+		if(flag){		   
+		remoteCar = 2;
+		socket.emit('remoteCar', remoteCar.toString());
+		}
+}
+
+function back(){
+	if(flag){
+		remoteCar = 3;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}
+function left(){
+	if(flag){
+		//alert("F");
+		remoteCar = 4;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}
+function right(){
+	if(flag){
+		remoteCar = 5;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}
+function stop(){
+	//alert("S");
+	if(flag){
+		remoteCar = 6;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}
+function onoff(){
+	flag = !flag;
+//	alert(flag.toString());
+	if(flag){
+		remoteCar = 1;
+		socket.emit('remoteCar', remoteCar.toString());
+	}else{
+		remoteCar = 0;
+		socket.emit('remoteCar', remoteCar.toString());
+	}
+}		
+
+
+window.onload = function(){init();}
+//setInterval(function(){ moveRight(partition);}, 2000);
+
+</script>
+<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+
+</head>
+<body>
+<div id="header" class="container">
+			<h1><a href="#">EC544 Group4 Challenge 8</a></h1>
+</div>
+<div style="float: right; width: 50%;">
+  <!--<img id="room" class="displayed" src="images/4floor.jpg" width="1064" height="400" alt=""/>-->
+  <img id="video" src="http://ec544d.ddns.net:8081/" class="video" position = "relative" height="160px" width="240px"/>
+ </div>
+  <div style="float: left; width: 50%;">
+  <button onClick="forward()" class="myButton" style="position: absolute; top: 15%; left: 20%;">F</button>
+  <button onClick="right()" class="myButtonPink" style="position: absolute; top: 45%; left: 28%;">R</button>
+  <button onClick="stop()" class="myButtonRed" style="position: absolute; top: 45%; left: 20%;">S</button>
+  <button onClick="left()" class="myButtonBlue" style="position: absolute; top: 45%; left:12%;">L</button>
+	
+  <button onClick="back()" class="myButton" style="position: absolute; top: 73%; left: 20%;">B</button>
+  </div>
+	<label class="switch" style="margin-left:445px; margin-top:40px;">
+		<input id="checkbox" class="switch-input" type="checkbox" onclick onchange="onoff()"/>
+		<span class="switch-label" data-on="On" data-off="Off"></span> 
+		<span class="switch-handle"></span> 
+	</label>
+</div>
+
+</body>
+</html>
