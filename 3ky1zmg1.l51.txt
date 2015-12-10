@@ -1,0 +1,29 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# You are currently rebasing branch 'master' on '04d4bed'.
+#
+# Changes to be committed:
+#	renamed:    starting afresh/BasicPid/BasicPid.ino -> challenge#7/AutonomousControl/BasicPid/BasicPid.ino
+#	renamed:    starting afresh/HallwayTurnModification/HallwayTurnModification.ino -> challenge#7/AutonomousControl/HallwayTurnModification/HallwayTurnModification.ino
+#	renamed:    starting afresh/v0.1/v0.1.ino -> challenge#7/AutonomousControl/v0.1/v0.1.ino
+#	renamed:    starting afresh/v0.2/v0.2.ino -> challenge#7/AutonomousControl/v0.2/v0.2.ino
+#	renamed:    starting afresh/v0.3/v0.3.ino -> challenge#7/AutonomousControl/v0.3/v0.3.ino
+#	renamed:    starting afresh/v0.4/v0.4.ino -> challenge#7/AutonomousControl/v0.4/v0.4.ino
+#	renamed:    starting afresh/v0.5/v0.5.ino -> challenge#7/AutonomousControl/v0.5/v0.5.ino
+#	renamed:    starting afresh/v1.0/v1.0.ino -> challenge#7/AutonomousControl/v1.0/v1.0.ino
+#	renamed:    challenge#7/AngleUltrasonic/AngleUltrasonic.ino -> challenge#7/Extra Files/AngleUltrasonic/AngleUltrasonic.ino
+#	renamed:    challenge#7/MainArduino_Lidar_UltraSonic/MainArduino_Lidar_UltraSonic.ino -> challenge#7/Extra Files/MainArduino_Lidar_UltraSonic/MainArduino_Lidar_UltraSonic.ino
+#	renamed:    challenge#7/Test/Test.ino -> challenge#7/Extra Files/Test/Test.ino
+#	renamed:    challenge#7/digitalCompass/digitalCompass.ino -> challenge#7/Extra Files/digitalCompass/digitalCompass.ino
+#	renamed:    challenge#7/localization/RSSI_KNN_Server.js -> challenge#7/Extra Files/localization/RSSI_KNN_Server.js
+#	renamed:    challenge#7/ultrasonicNew/ultrasonicNew.ino -> challenge#7/Extra Files/ultrasonicNew/ultrasonicNew.ino
+#	renamed:    challenge#8/CombinedServers.js -> challenge#8/ControlServer.js
+#	renamed:    challenge#8/KNN_Server_5f.js -> challenge#8/Extra Files/KNN_Server_5f.js
+#	renamed:    challenge#8/RSSI_KNN_Server_old.js -> challenge#8/Extra Files/RSSI_KNN_Server_old.js
+#	renamed:    challenge#8/ind.html -> challenge#8/Extra Files/ind.html
+#
+
